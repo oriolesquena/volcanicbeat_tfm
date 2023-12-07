@@ -1,0 +1,94 @@
+<div class="flex flex-col justify-center items-center gap-16 bg-vb-dark w-5/6 py-16 mx-auto mt-20 mb-12">
+    <h1 class="font-display text-white text-4xl font-bold">CONTACTA'NS</h1>
+    <form [formGroup]="contactForm" (ngSubmit)="submit()" class="flex flex-col justify-center items-center">
+        <section>
+            <mat-form-field appearance="outline" class="w-800">
+                <mat-label>Name: </mat-label>
+                <input matInput type="text" [formControl]="name" required />
+                <mat-error *ngIf="name.hasError('required') && name.dirty && name.touched">
+                    El nom és obligatori
+                </mat-error>
+                <mat-error *ngIf="name.hasError('minlength') && name.dirty && name.touched">
+                    El nom ha de tenir mínim dos caràcters
+                </mat-error>
+                <mat-error *ngIf="name.hasError('maxlength') && name.dirty && name.touched">
+                    El nom ha de tenir com a màxim 64 caràcters
+                </mat-error>
+            </mat-form-field>
+        </section>
+        <section>
+            <mat-form-field appearance="outline" class="w-800">
+                <mat-label>Email: </mat-label>
+                <input matInput type="email" [formControl]="email" required />
+                <mat-error *ngIf="email.hasError('pattern') && !email.hasError('required') && check_politiques.dirty">
+                    El correu no està en un format vàl·lid
+                </mat-error>
+                <mat-error *ngIf="email.hasError('required') && check_politiques.dirty">
+                    El correu és obligatori
+                </mat-error>
+            </mat-form-field>
+        </section>
+        <section>
+            <mat-form-field appearance="outline" class="w-800">
+                <mat-label>Telèfon mòbil: </mat-label>
+                <input matInput type="text" [formControl]="mobile_phone" />
+                <mat-error *ngIf="mobile_phone.hasError('minlength') && check_politiques.dirty">
+                    El número de telèfon ha de tenir mínim 9 dígits
+                </mat-error>
+                <mat-error *ngIf="mobile_phone.hasError('maxlength') && check_politiques.dirty">
+                    El número de telèfon ha de tenir un màxim de 13 dígits
+                </mat-error>
+                <mat-error
+                    *ngIf="mobile_phone.hasError('pattern') && !mobile_phone.hasError('required') && check_politiques.dirty">
+                    El número de telèfon no té un format vàlid
+                </mat-error>
+            </mat-form-field>
+        </section>
+        <section>
+            <mat-form-field appearance="outline" class="w-800">
+                <mat-label>Assumpte: </mat-label>
+                <input matInput type="text" [formControl]="title" required />
+                <mat-error *ngIf="title.hasError('required') && check_politiques.dirty">
+                    L'assumpte és obligatori
+                </mat-error>
+                <mat-error *ngIf="title.hasError('minlength') && check_politiques.dirty">
+                    L'assumpte ha de tenir mínim 8 caràcters
+                </mat-error>
+                <mat-error *ngIf="title.hasError('maxlength') && check_politiques.dirty">
+                    L'assumpte ha de tenir com a màxim 64 caràcters
+                </mat-error>
+            </mat-form-field>
+        </section>
+        <section>
+            <mat-form-field appearance="outline" class="w-800">
+                <mat-label>Missatge: </mat-label>
+                <textarea matInput type="text" [formControl]="msg" required
+                    placeholder="Escriu aquí el teu missatge..."></textarea>
+                <mat-error *ngIf="msg.hasError('required') && check_politiques.dirty">
+                    El missatge és obligatori
+                </mat-error>
+                <mat-error *ngIf="msg.hasError('minlength') && check_politiques.dirty">
+                    El missatge ha de tenir mínim 8 caràcters
+                </mat-error>
+                <mat-error *ngIf="msg.hasError('maxlength') && check_politiques.dirty">
+                    El missatge ha de tenir com a màxim 256 caràcters
+                </mat-error>
+            </mat-form-field>
+        </section>
+        <section>
+            <mat-checkbox [formControl]="check_politiques" color="primary" required>
+                <p class="contents text-white">Estic d'acord amb les <a href="./condicions-us-de-les-dades-personals"
+                        class="underline">condicions d'ús de les dades
+                        personals</a></p>.
+                <mat-error *ngIf="check_politiques.hasError('required') && check_politiques.dirty">
+                    És necessari acceptar les condicions d'ús de les dades personals.
+                </mat-error>
+            </mat-checkbox>
+        </section>
+
+        <section class="text-white mt-4">
+            <button mat-raised-button type="submit" [disabled]="!contactForm.valid"
+                class="contact-button">Enviar</button>
+        </section>
+    </form>
+</div>
