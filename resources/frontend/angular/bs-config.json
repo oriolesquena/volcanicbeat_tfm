@@ -4,6 +4,6 @@
         "./src/**/*.{html,htm,css,js}"
     ],
     "server": {
-        "baseDir": "./dist/volcanic-beat"
+        "baseDir": "./dist/angular"
     }
 }

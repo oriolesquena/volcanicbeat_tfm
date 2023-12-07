@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "volcanic-beat": {
+    "angular": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -17,7 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/volcanic-beat",
+            "outputPath": "dist/angular",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": [
@@ -36,6 +36,8 @@
           },
           "configurations": {
             "production": {
+              "outputPath": "../../../public/assets/angular",
+              "optimization": true,
               "budgets": [
                 {
                   "type": "initial",
@@ -51,6 +53,8 @@
               "outputHashing": "all"
             },
             "development": {
+              "outputPath": "dist/assets/angular",
+              "baseHref": "/assets/angular/",
               "buildOptimizer": false,
               "optimization": false,
               "vendorChunk": true,
@@ -65,10 +69,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "volcanic-beat:build:production"
+              "browserTarget": "angular:build:production"
             },
             "development": {
-              "browserTarget": "volcanic-beat:build:development"
+              "browserTarget": "angular:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -76,7 +80,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "volcanic-beat:build"
+            "browserTarget": "angular:build"
           }
         },
         "test": {
