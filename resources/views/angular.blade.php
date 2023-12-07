@@ -14,6 +14,6 @@
 
 <body class="mat-typography">
   <app-root></app-root>
-<script src="runtime.f3cc930729914d15.js" type="module"></script><script src="polyfills.7484e6bfeb976856.js" type="module"></script><script src="main.13d168a6308397e0.js" type="module"></script></body>
+<script src="runtime.f3cc930729914d15.js" type="module"></script><script src="polyfills.7484e6bfeb976856.js" type="module"></script><script src="main.a6ad46b49bb7b0cb.js" type="module"></script></body>
 
 </html>

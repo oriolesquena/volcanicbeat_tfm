@@ -1,0 +1,11 @@
+div {
+    background-color: #3c4c41;
+    color: white;
+    font-size: 1.25rem;
+    width: 50%;
+    height: 90%;
+}
+
+ul {
+    list-style-type: none;
+}

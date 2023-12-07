@@ -9,7 +9,7 @@ export class FormMailService {
 
   constructor(private http: HttpClient) {}
 
-  sendEmail(contact: any) {
+  sendEmail(contact: ContactDTO) {
     const endpoint = 'http://localhost:8000/api/send-email'
 
     return this.http.post(endpoint, contact, { observe: 'response' });

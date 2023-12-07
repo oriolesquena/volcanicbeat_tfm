@@ -95,12 +95,9 @@ export class ContactFormComponent implements OnInit {
       check_politiques: this.contactMsg.check_politiques,
     };
 
-    console.log( contact );
+    // console.log( contact );
 
-    const formData = this.contactForm.value;
-    formData.append('name', contact.name);
-
-    this.formMailService.sendEmail(formData).subscribe({
+    this.formMailService.sendEmail(contact).subscribe({
       next: (response: HttpResponse<any>) => {
         if (response.ok) {
           this.contactForm.reset();
