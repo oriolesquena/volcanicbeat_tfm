@@ -1,5 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { HttpClientModule } from '@angular/common/http';
+import { FormMailService } from './Services/form-mail.service';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -35,6 +37,7 @@ import {MatInputModule} from '@angular/material/input';
   imports: [
     HeaderComponent,
     BrowserModule,
+    HttpClientModule,
     AppRoutingModule,
     FooterComponent,
     BrowserAnimationsModule,
@@ -44,7 +47,7 @@ import {MatInputModule} from '@angular/material/input';
     MatFormFieldModule,
     MatInputModule
   ],
-  providers: [],
+  providers: [FormMailService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

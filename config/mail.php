@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'default' => env('MAIL_MAILER', 'smtp'),
+    'default' => env('MAIL_MAILER', 'failover'),
 
     /*
     |--------------------------------------------------------------------------
@@ -52,6 +52,8 @@ return [
 
         'mailgun' => [
             'transport' => 'mailgun',
+            'domain' => env('MAILGUN_DOMAIN'),
+            'secret' => env('MAILGUN_SECRET'),
             // 'client' => [
             //     'timeout' => 5,
             // ],
@@ -83,6 +85,8 @@ return [
             'transport' => 'failover',
             'mailers' => [
                 'smtp',
+                'mailgun',
+                'postmark',
                 'log',
             ],
         ],
@@ -100,8 +104,8 @@ return [
     */
 
     'from' => [
-        'address' => env('MAIL_FROM_ADDRESS', 'hello@example.com'),
-        'name' => env('MAIL_FROM_NAME', 'Example'),
+        'address' => env('MAIL_FROM_ADDRESS', 'laser@volcanicbeat.com'),
+        'name' => env('MAIL_FROM_NAME', 'Volcanic Beat Forms'),
     ],
 
     /*

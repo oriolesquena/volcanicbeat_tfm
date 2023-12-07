@@ -6,6 +6,8 @@ import {
   Validators,
 } from '@angular/forms';
 import { ContactDTO } from '../Models/contact.dto';
+import { FormMailService } from '../Services/form-mail.service';
+import { HttpResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-contact-form',
@@ -26,7 +28,7 @@ export class ContactFormComponent implements OnInit {
 
   isValidForm: boolean | null;
 
-  constructor (private formBuilder: FormBuilder) {
+  constructor (private formBuilder: FormBuilder, private formMailService: FormMailService) {
     this.contactMsg = new ContactDTO('', '', '', '', '', false);
 
     this.isValidForm = null;
@@ -95,6 +97,18 @@ export class ContactFormComponent implements OnInit {
 
     console.log( contact );
 
-    this.contactForm.reset();
+    const formData = this.contactForm.value;
+    formData.append('name', contact.name);
+
+    this.formMailService.sendEmail(formData).subscribe({
+      next: (response: HttpResponse<any>) => {
+        if (response.ok) {
+          this.contactForm.reset();
+        }
+      },
+      error: (error: any) => {
+        console.error('Error sending email:', error);
+      }
+    })
   }
 }

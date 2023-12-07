@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AngularController;
+use App\Mail\MailForm;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,8 +16,6 @@ use App\Http\Controllers\AngularController;
 */
 
 Route::any('/{any}', [AngularController::class, 'index'])-> where('any', '^(?!api).*$');
-
-
 
 /*
 get('/', function () {

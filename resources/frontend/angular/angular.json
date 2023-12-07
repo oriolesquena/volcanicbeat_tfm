@@ -37,6 +37,7 @@
           "configurations": {
             "production": {
               "outputPath": "../../../public/assets/angular",
+              "baseHref": "/assets/angular/",
               "optimization": true,
               "budgets": [
                 {
@@ -69,7 +70,8 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "angular:build:production"
+              "browserTarget": "angular:build:production",
+              "proxyConfig": "src/proxy.conf.json"
             },
             "development": {
               "browserTarget": "angular:build:development"
