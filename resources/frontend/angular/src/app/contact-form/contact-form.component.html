@@ -20,10 +20,10 @@
             <mat-form-field appearance="outline" class="w-800">
                 <mat-label>Email: </mat-label>
                 <input matInput type="email" [formControl]="email" required />
-                <mat-error *ngIf="email.hasError('pattern') && !email.hasError('required') && check_politiques.dirty">
+                <mat-error *ngIf="email.hasError('pattern') && !email.hasError('required') && email.dirty">
                     El correu no està en un format vàl·lid
                 </mat-error>
-                <mat-error *ngIf="email.hasError('required') && check_politiques.dirty">
+                <mat-error *ngIf="email.hasError('required') && email.dirty">
                     El correu és obligatori
                 </mat-error>
             </mat-form-field>
@@ -32,14 +32,14 @@
             <mat-form-field appearance="outline" class="w-800">
                 <mat-label>Telèfon mòbil: </mat-label>
                 <input matInput type="text" [formControl]="mobile_phone" />
-                <mat-error *ngIf="mobile_phone.hasError('minlength') && check_politiques.dirty">
+                <mat-error *ngIf="mobile_phone.hasError('minlength') && mobile_phone.dirty">
                     El número de telèfon ha de tenir mínim 9 dígits
                 </mat-error>
-                <mat-error *ngIf="mobile_phone.hasError('maxlength') && check_politiques.dirty">
+                <mat-error *ngIf="mobile_phone.hasError('maxlength') && mobile_phone.dirty">
                     El número de telèfon ha de tenir un màxim de 13 dígits
                 </mat-error>
                 <mat-error
-                    *ngIf="mobile_phone.hasError('pattern') && !mobile_phone.hasError('required') && check_politiques.dirty">
+                    *ngIf="mobile_phone.hasError('pattern') && !mobile_phone.hasError('required') && mobile_phone.dirty">
                     El número de telèfon no té un format vàlid
                 </mat-error>
             </mat-form-field>
@@ -48,13 +48,13 @@
             <mat-form-field appearance="outline" class="w-800">
                 <mat-label>Assumpte: </mat-label>
                 <input matInput type="text" [formControl]="title" required />
-                <mat-error *ngIf="title.hasError('required') && check_politiques.dirty">
+                <mat-error *ngIf="title.hasError('required') && title.dirty">
                     L'assumpte és obligatori
                 </mat-error>
-                <mat-error *ngIf="title.hasError('minlength') && check_politiques.dirty">
+                <mat-error *ngIf="title.hasError('minlength') && title.dirty">
                     L'assumpte ha de tenir mínim 8 caràcters
                 </mat-error>
-                <mat-error *ngIf="title.hasError('maxlength') && check_politiques.dirty">
+                <mat-error *ngIf="title.hasError('maxlength') && title.dirty">
                     L'assumpte ha de tenir com a màxim 64 caràcters
                 </mat-error>
             </mat-form-field>
@@ -64,14 +64,14 @@
                 <mat-label>Missatge: </mat-label>
                 <textarea matInput type="text" [formControl]="msg" required
                     placeholder="Escriu aquí el teu missatge..."></textarea>
-                <mat-error *ngIf="msg.hasError('required') && check_politiques.dirty">
+                <mat-error *ngIf="msg.hasError('required') && msg.dirty">
                     El missatge és obligatori
                 </mat-error>
-                <mat-error *ngIf="msg.hasError('minlength') && check_politiques.dirty">
+                <mat-error *ngIf="msg.hasError('minlength') && msg.dirty">
                     El missatge ha de tenir mínim 8 caràcters
                 </mat-error>
-                <mat-error *ngIf="msg.hasError('maxlength') && check_politiques.dirty">
-                    El missatge ha de tenir com a màxim 256 caràcters
+                <mat-error *ngIf="msg.hasError('maxlength') && msg.dirty">
+                    El missatge ha de tenir com a màxim 1024 caràcters
                 </mat-error>
             </mat-form-field>
         </section>
@@ -87,8 +87,10 @@
         </section>
 
         <section class="text-white mt-4">
-            <button mat-raised-button type="submit" [disabled]="!contactForm.valid"
-                class="contact-button">Enviar</button>
+            <button mat-raised-button type="submit" [disabled]="!contactForm.valid || processing"
+                *ngIf="!processing && !showMessage" class="contact-button">Enviar</button>
+            <mat-spinner *ngIf="processing"></mat-spinner>
+            <p class="font-semibold text-xl" *ngIf="showMessage">El missatge s'ha enviat correctament!</p>
         </section>
     </form>
 </div>

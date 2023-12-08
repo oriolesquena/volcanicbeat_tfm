@@ -87,3 +87,7 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   --mdc-checkbox-disabled-selected-icon-color: rgb(255 255 255 / 38%) !important;
     --mdc-checkbox-disabled-unselected-icon-color: rgb(255 255 255 / 38%) !important;
 }
+
+html {
+  --mdc-outlined-text-field-input-text-placeholder-color: rgb(255 255 255 / 80%) !important;
+}

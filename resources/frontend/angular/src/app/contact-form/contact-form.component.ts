@@ -27,11 +27,15 @@ export class ContactFormComponent implements OnInit {
   contactForm: FormGroup;
 
   isValidForm: boolean | null;
+  processing: boolean;
+  showMessage: boolean;
 
   constructor (private formBuilder: FormBuilder, private formMailService: FormMailService) {
     this.contactMsg = new ContactDTO('', '', '', '', '', false);
 
     this.isValidForm = null;
+    this.processing = false;
+    this.showMessage = false;
 
     this.name = new FormControl(this.contactMsg.name, [
       Validators.required,
@@ -59,7 +63,7 @@ export class ContactFormComponent implements OnInit {
     this.msg = new FormControl(this.contactMsg.msg, [
       Validators.required,
       Validators.minLength(8),
-      Validators.maxLength(256),
+      Validators.maxLength(1024),
     ]);
 
     this.check_politiques = new FormControl(this.contactMsg.check_politiques, Validators.required)
@@ -78,6 +82,7 @@ export class ContactFormComponent implements OnInit {
 
   submit(): void {
     this.isValidForm = false;
+    this.processing = true;
 
     if (this.contactForm.invalid) {
       return;
@@ -100,7 +105,14 @@ export class ContactFormComponent implements OnInit {
     this.formMailService.sendEmail(contact).subscribe({
       next: (response: HttpResponse<any>) => {
         if (response.ok) {
-          this.contactForm.reset();
+          setTimeout(() => {
+            this.contactForm.reset();
+            this.processing = false;
+            this.showMessage = true;
+          }, 800);
+          setTimeout(() => {
+            this.showMessage = false;
+          }, 3500);
         }
       },
       error: (error: any) => {
