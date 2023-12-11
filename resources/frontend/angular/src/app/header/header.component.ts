@@ -23,6 +23,10 @@ export class HeaderComponent {
       this.router.navigateByUrl('about');
     }
 
+    activities(): void {
+      this.router.navigateByUrl('activities');
+    }
+
     prices(): void {
       this.router.navigateByUrl('prices');
     }

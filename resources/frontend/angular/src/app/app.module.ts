@@ -23,6 +23,7 @@ import {MatButtonModule} from '@angular/material/button';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import { ActivitiesComponent } from './activities/activities.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,8 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
     ContactComponent,
     CalendarComponent,
     CalendarFormComponent,
-    ContactFormComponent
+    ContactFormComponent,
+    ActivitiesComponent
   ],
   imports: [
     HeaderComponent,
