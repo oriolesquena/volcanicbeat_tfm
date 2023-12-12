@@ -22,8 +22,12 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatButtonModule} from '@angular/material/button';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
+import {MatIconModule} from '@angular/material/icon';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import {MatGridListModule} from '@angular/material/grid-list';
+
 import { ActivitiesComponent } from './activities/activities.component';
+import { GalleryComponent } from './gallery/gallery.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +39,8 @@ import { ActivitiesComponent } from './activities/activities.component';
     CalendarComponent,
     CalendarFormComponent,
     ContactFormComponent,
-    ActivitiesComponent
+    ActivitiesComponent,
+    GalleryComponent
   ],
   imports: [
     HeaderComponent,
@@ -49,7 +54,9 @@ import { ActivitiesComponent } from './activities/activities.component';
     MatButtonModule,
     MatFormFieldModule,
     MatInputModule,
-    MatProgressSpinnerModule
+    MatIconModule,
+    MatProgressSpinnerModule,
+    MatGridListModule
   ],
   providers: [FormMailService],
   bootstrap: [AppComponent]

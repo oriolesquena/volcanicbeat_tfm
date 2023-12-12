@@ -34,4 +34,8 @@ export class HeaderComponent {
     contact(): void {
       this.router.navigateByUrl('contact');
     }
+
+    gallery(): void {
+      this.router.navigateByUrl('gallery');
+    }
 }
