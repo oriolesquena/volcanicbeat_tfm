@@ -3,7 +3,7 @@
     <form [formGroup]="contactForm" (ngSubmit)="submit()" class="flex flex-col justify-center items-center">
         <section>
             <mat-form-field appearance="outline" class="w-800">
-                <mat-label>Name: </mat-label>
+                <mat-label>Nom i cognoms: </mat-label>
                 <input matInput type="text" [formControl]="name" required />
                 <mat-error *ngIf="name.hasError('required') && name.dirty && name.touched">
                     El nom és obligatori
@@ -18,7 +18,7 @@
         </section>
         <section>
             <mat-form-field appearance="outline" class="w-800">
-                <mat-label>Email: </mat-label>
+                <mat-label>Correu electrònic: </mat-label>
                 <input matInput type="email" [formControl]="email" required />
                 <mat-error *ngIf="email.hasError('pattern') && !email.hasError('required') && email.dirty">
                     El correu no està en un format vàl·lid

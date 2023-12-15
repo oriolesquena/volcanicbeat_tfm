@@ -8,6 +8,7 @@ export class BookingDTO {
     msg: string;
     under_sixteen: boolean;
     check_politiques: boolean;
+    isBooking: boolean;
   
     constructor(
       name: string,
@@ -19,6 +20,7 @@ export class BookingDTO {
       msg: string,
       under_sixteen: boolean,
       check_politiques: boolean,
+      isBooking: boolean,
     ) {
       this.name = name;
       this.email = email;
@@ -29,6 +31,7 @@ export class BookingDTO {
       this.msg = msg;
       this.under_sixteen = under_sixteen;
       this.check_politiques = check_politiques;
+      this.isBooking = isBooking;
     }
   }
   

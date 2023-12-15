@@ -11,12 +11,37 @@ import { FormMailService } from '../Services/form-mail.service';
 import { HttpResponse } from '@angular/common/http';
 import { BookingDTO } from '../Models/booking.dto';
 
+import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
+import { MomentDateAdapter } from '@angular/material-moment-adapter';
+
+const MY_DATE_FORMAT = {
+  parse: {
+    dateInput: 'DD/MM/YYYY', // this is how your date will be parsed from Input
+  },
+  display: {
+    dateInput: 'DD/MM/YYYY', // this is how your date will get displayed on the Input
+    monthYearLabel: 'MMMM YYYY',
+    dateA11yLabel: 'LL',
+    monthYearA11yLabel: 'MMMM YYYY'
+  }
+};
+
+class CustomDateAdapter extends MomentDateAdapter {
+  override getFirstDayOfWeek(): number {
+    return 1;
+  }
+}
+
 @Component({
   selector: 'app-calendar-form',
   templateUrl: './calendar-form.component.html',
-  styleUrls: ['./calendar-form.component.scss']
+  styleUrls: ['./calendar-form.component.scss'],
+  providers: [{ provide: DateAdapter, useClass: CustomDateAdapter, deps: [MAT_DATE_LOCALE] },
+  { provide: MAT_DATE_FORMATS, useValue: MY_DATE_FORMAT }]
 })
+
 export class CalendarFormComponent {
+
   bookingMsg: BookingDTO;
 
   name: FormControl;
@@ -36,7 +61,7 @@ export class CalendarFormComponent {
   showMessage: boolean;
 
   constructor (private formBuilder: FormBuilder, private formMailService: FormMailService) {
-    this.bookingMsg = new BookingDTO('', '', '', '', 0, new Date(), '', false, false);
+    this.bookingMsg = new BookingDTO('', '', '', '', 8, new Date(), '', false, false, true);
 
     this.isValidForm = null;
     this.processing = false;
@@ -64,15 +89,16 @@ export class CalendarFormComponent {
     this.num_players = new FormControl(this.bookingMsg.num_players, [
       Validators.required,
       Validators.pattern("^[0-9]*$"),
+      Validators.min(8),
+      Validators.max(16),
     ]);
 
     this.date = new FormControl(
-      formatDate(this.bookingMsg.date, 'yyyy-MM-dd HH:mm', 'en'),
+      formatDate(this.bookingMsg.date, 'yyyy-MM-dd', 'en'),
       [Validators.required]
     );
 
     this.msg = new FormControl(this.bookingMsg.msg, [
-      Validators.required,
       Validators.minLength(8),
       Validators.maxLength(1024),
     ]);
@@ -117,6 +143,7 @@ export class CalendarFormComponent {
       msg: this.bookingMsg.msg,
       under_sixteen: this.bookingMsg.under_sixteen,
       check_politiques: this.bookingMsg.check_politiques,
+      isBooking: this.bookingMsg.isBooking,
     };
 
     // console.log( contact );

@@ -26,10 +26,19 @@ class MailForm extends Mailable
     public function build()
     {
         $name = $this->data['name'];
+        $isBooking = $this->data['isBooking'];
+
+        if($isBooking === true) {
+            $subject = 'Nou formulari de reserves';
+            $view = 'emails.booking';
+        } else {
+            $subject = 'Nou formulari de contacte';
+            $view = 'emails.contact';
+        }
 
         return $this
             ->from(env('MAIL_FROM_ADDRESS', 'laser@volcanicbeat.com'), $name)
-            ->subject('Nou formulari de contacte')
-            ->view('emails.contact');
+            ->subject($subject)
+            ->view($view);
     }
 }

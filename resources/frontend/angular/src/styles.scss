@@ -88,4 +88,25 @@ html, body {
 
 html {
   --mdc-outlined-text-field-input-text-placeholder-color: rgb(255 255 255 / 80%) !important;
+  --mat-datepicker-toggle-icon-color: rgb(255 255 255 / 80%) !important;
+}
+
+.mdc-text-field--filled:not(.mdc-text-field--disabled) {
+  background-color: rgb(38 38 38) !important
+}
+
+.mdc-text-field--filled:not(.mdc-text-field--disabled) .mdc-text-field__input {
+  color: rgb(255 255 255) !important;
+}
+
+.mat-mdc-select {
+  color: rgb(255 255 255) !important;
+}
+
+.mat-mdc-select-arrow {
+  color: rgb(255 255 255 / 80%) !important;
+}
+
+.mdc-text-field--filled:not(.mdc-text-field--disabled) .mdc-line-ripple::before {
+    border-bottom-color: rgb(255 255 255 / 80%) !important;
 }
