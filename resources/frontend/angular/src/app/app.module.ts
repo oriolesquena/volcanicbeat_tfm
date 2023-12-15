@@ -28,6 +28,7 @@ import {MatGridListModule} from '@angular/material/grid-list';
 
 import { ActivitiesComponent } from './activities/activities.component';
 import { GalleryComponent } from './gallery/gallery.component';
+import { BookingComponent } from './booking/booking.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +41,8 @@ import { GalleryComponent } from './gallery/gallery.component';
     CalendarFormComponent,
     ContactFormComponent,
     ActivitiesComponent,
-    GalleryComponent
+    GalleryComponent,
+    BookingComponent
   ],
   imports: [
     HeaderComponent,

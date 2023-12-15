@@ -31,6 +31,10 @@ export class HeaderComponent {
       this.router.navigateByUrl('prices');
     }
 
+    booking(): void {
+      this.router.navigateByUrl('booking');
+    }
+
     contact(): void {
       this.router.navigateByUrl('contact');
     }

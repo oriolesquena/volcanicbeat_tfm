@@ -6,6 +6,7 @@ import { ActivitiesComponent } from './activities/activities.component';
 import { PricesComponent } from './prices/prices.component';
 import { ContactComponent } from './contact/contact.component';
 import { GalleryComponent } from './gallery/gallery.component';
+import { BookingComponent } from './booking/booking.component';
 
 const routes: Routes = [
   {
@@ -27,6 +28,10 @@ const routes: Routes = [
   {
     path: 'prices',
     component: PricesComponent,
+  },
+  {
+    path: 'booking',
+    component: BookingComponent,
   },
   {
     path: 'contact',
