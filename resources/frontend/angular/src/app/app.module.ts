@@ -11,8 +11,8 @@ import { PricesComponent } from './prices/prices.component';
 import { ContactComponent } from './contact/contact.component';
 import { CalendarComponent } from './calendar/calendar.component';
 import { CalendarFormComponent } from './calendar-form/calendar-form.component';
-import { HeaderComponent } from './header/header.component';
-import { FooterComponent } from './footer/footer.component';
+import { HeaderComponent } from './Shared/header/header.component';
+import { FooterComponent } from './Shared/footer/footer.component';
 import { ContactFormComponent } from './contact-form/contact-form.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
@@ -29,6 +29,7 @@ import {MatSelectModule} from '@angular/material/select';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import {MatCardModule} from '@angular/material/card';
+import {MatStepperModule} from '@angular/material/stepper';
 
 import { ActivitiesComponent } from './activities/activities.component';
 import { GalleryComponent } from './gallery/gallery.component';
@@ -66,7 +67,8 @@ import { BookingComponent } from './booking/booking.component';
     MatSelectModule,
     MatDatepickerModule,
     MatNativeDateModule,
-    MatCardModule
+    MatCardModule,
+    MatStepperModule
   ],
   providers: [FormMailService],
   bootstrap: [AppComponent]
