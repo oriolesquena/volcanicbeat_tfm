@@ -10,6 +10,9 @@ import {
 import { FormMailService } from '../Services/form-mail.service';
 import { HttpResponse } from '@angular/common/http';
 import { BookingDTO } from '../Models/booking.dto';
+import { BookingComponent } from '../booking/booking.component';
+
+import {MatCalendarCellCssClasses} from '@angular/material/datepicker';
 
 import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
 import { MomentDateAdapter } from '@angular/material-moment-adapter';
@@ -41,6 +44,7 @@ class CustomDateAdapter extends MomentDateAdapter {
 })
 
 export class CalendarComponent {
+
   bookingMsg: BookingDTO;
 
   name: FormControl;
@@ -49,6 +53,7 @@ export class CalendarComponent {
   activity: FormControl;
   num_players: FormControl;
   date: FormControl;
+  selectedDate: any;
   msg: FormControl;
   under_sixteen: FormControl;
   check_politiques: FormControl;
@@ -61,12 +66,16 @@ export class CalendarComponent {
   processing: boolean;
   showMessage: boolean;
 
+  datesToHighlight: Date[];
+
   constructor (private formBuilder: FormBuilder, private formMailService: FormMailService) {
     this.bookingMsg = new BookingDTO('', '', '', '', 8, new Date(), '', false, false, true);
 
     this.isValidForm = null;
     this.processing = false;
     this.showMessage = false;
+    
+    this.datesToHighlight = [new Date('2024-01-07T11:00:00'), new Date('2024-01-07T13:00:00'), new Date('2024-01-07T17:00:00'), new Date('2024-02-02T17:00:00'), new Date('2024-01-07T19:00:00'), new Date('2024-01-14T11:00:00'), new Date('2024-01-14T13:00:00')];
 
     this.name = new FormControl(this.bookingMsg.name, [
       Validators.required,
@@ -109,7 +118,7 @@ export class CalendarComponent {
     this.check_politiques = new FormControl(this.bookingMsg.check_politiques, Validators.required);
 
     this.calendarForm = this.formBuilder.group({
-      date: this.date,
+      selectedDate: this.selectedDate,
     })
 
     this.timeTableForm = this.formBuilder.group({
@@ -129,6 +138,41 @@ export class CalendarComponent {
   }
 
   ngOnInit(): void {}
+
+  calculateGames(date: Date): number {
+    return this.datesToHighlight.filter((d) => d.getDate() === date.getDate()).length;
+  }
+
+  dateClass() {
+    return (date: Date): MatCalendarCellCssClasses => {
+      date = new Date(date);
+      const highlightDate = this.datesToHighlight
+        .map(strDate => new Date(strDate))
+        .some(d => {
+          return d.getDate() === date.getDate() && d.getMonth() === date.getMonth() && d.getFullYear() === date.getFullYear()
+        });
+      
+      if (highlightDate) {
+        switch (this.calculateGames(date)) {
+          case 1:
+            return 'one-game';
+          case 2:
+            return 'two-games';
+          case 3:
+            return 'three-games';
+          default:
+            return 'full-games';
+        }
+      } else {
+        return '';
+      }
+    };
+  }
+
+  onSelect(event: any){
+    console.log(event);
+    this.selectedDate= event;
+  }
 
   submit(): void {
     this.isValidForm = false;

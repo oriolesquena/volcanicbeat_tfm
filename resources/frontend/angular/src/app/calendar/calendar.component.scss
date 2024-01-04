@@ -1,12 +1,8 @@
 .demo-inline-calendar-card {
     width: calc(300px + 10vw);
+    margin: auto;
 }
 
 mat-calendar {
     font-size: calc(1rem + 0.4vw);
 }
-
-button.example-custom-date-class {
-    background: orange;
-    border-radius: 100%;
-  }

@@ -110,3 +110,19 @@ html {
 .mdc-text-field--filled:not(.mdc-text-field--disabled) .mdc-line-ripple::before {
     border-bottom-color: rgb(255 255 255 / 80%) !important;
 }
+
+.one-game>span.mat-calendar-body-cell-content:not(.mat-calendar-body-selected) {
+  background-color: rgb(213 192 53 / 44%);
+}
+
+.two-games>span.mat-calendar-body-cell-content:not(.mat-calendar-body-selected) {
+  background-color: rgba(213, 146, 53, 0.44);
+}
+
+.three-games>span.mat-calendar-body-cell-content:not(.mat-calendar-body-selected) {
+  background-color: rgba(213, 98, 53, 0.44);
+}
+
+.full-games>span.mat-calendar-body-cell-content:not(.mat-calendar-body-selected) {
+  background-color: rgba(125, 125, 125, 0.44);
+}
