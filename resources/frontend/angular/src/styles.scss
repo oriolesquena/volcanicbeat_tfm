@@ -111,6 +111,10 @@ html {
     border-bottom-color: rgb(255 255 255 / 80%) !important;
 }
 
+.mdc-text-field--outlined:not(.mdc-text-field--disabled) .mdc-floating-label {
+  color: rgb(255 255 255 / 80%) !important;
+}
+
 .one-game>span.mat-calendar-body-cell-content:not(.mat-calendar-body-selected) {
   background-color: rgb(213 192 53 / 44%);
 }

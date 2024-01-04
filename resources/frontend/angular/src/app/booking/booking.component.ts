@@ -9,13 +9,15 @@ import { Reservation } from '../Interfaces/reservation';
   styleUrls: ['./booking.component.scss']
 })
 export class BookingComponent {
+
   reservations: Reservation[] = [];
 
   constructor(public reservationService: ReservationService) {}
-
+/*
   ngOnInit(): void {
     this.reservationService.getAll().subscribe((data: Reservation[]) => {
       this.reservations = data;
+      console.log('first');
       console.log(this.reservations);
     })
   }
@@ -29,4 +31,5 @@ export class BookingComponent {
 
     return dates;
   }
+*/
 }

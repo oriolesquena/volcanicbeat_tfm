@@ -27,11 +27,8 @@ export class ReservationService {
       )
     }
 
-    create(reservation: any): Observable<Reservation> {
-      return this.httpClient.post<Reservation>(this.apiURL, JSON.stringify(reservation), this.httpOptions)
-      .pipe(
-        catchError(this.errorHandler)
-      )
+    create(reservation: any) {
+      return this.httpClient.post(this.apiURL, reservation, { observe: 'response' });
     }
 
     find(id: number): Observable<Reservation> {

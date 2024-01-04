@@ -17,7 +17,7 @@ class ReservationController extends Controller
         return response()->json($data, 200);
     }
 
-    public function create()
+    public function create(Request $request)
     {
         $data['name'] = $request['name'];
         $data['email'] = $request['email'];

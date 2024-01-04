@@ -6,3 +6,8 @@
 mat-calendar {
     font-size: calc(1rem + 0.4vw);
 }
+
+.mat-stepper-horizontal {
+    background-color: rgb(38 38 38 / var(--tw-bg-opacity));
+    color: white;
+}

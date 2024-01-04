@@ -10,7 +10,9 @@ import {
 import { FormMailService } from '../Services/form-mail.service';
 import { HttpResponse } from '@angular/common/http';
 import { BookingDTO } from '../Models/booking.dto';
-import { BookingComponent } from '../booking/booking.component';
+
+import { ReservationService } from '../Services/reservation.service';
+import { Reservation } from '../Interfaces/reservation';
 
 import {MatCalendarCellCssClasses} from '@angular/material/datepicker';
 
@@ -44,6 +46,7 @@ class CustomDateAdapter extends MomentDateAdapter {
 })
 
 export class CalendarComponent {
+  reservations: Reservation[] = [];
 
   bookingMsg: BookingDTO;
 
@@ -52,7 +55,7 @@ export class CalendarComponent {
   mobile_phone: FormControl;
   activity: FormControl;
   num_players: FormControl;
-  date: FormControl;
+  time: FormControl;
   selectedDate: any;
   msg: FormControl;
   under_sixteen: FormControl;
@@ -66,16 +69,17 @@ export class CalendarComponent {
   processing: boolean;
   showMessage: boolean;
 
-  datesToHighlight: Date[];
+  datesToHighlight: Date[] = [];
+  reservationDate: Date = new Date();
 
-  constructor (private formBuilder: FormBuilder, private formMailService: FormMailService) {
-    this.bookingMsg = new BookingDTO('', '', '', '', 8, new Date(), '', false, false, true);
+  constructor (private formBuilder: FormBuilder, private formMailService: FormMailService, public reservationService: ReservationService) {
+    this.bookingMsg = new BookingDTO('', '', '', '', 8, '', '', false, false, true);
 
     this.isValidForm = null;
     this.processing = false;
     this.showMessage = false;
     
-    this.datesToHighlight = [new Date('2024-01-07T11:00:00'), new Date('2024-01-07T13:00:00'), new Date('2024-01-07T17:00:00'), new Date('2024-02-02T17:00:00'), new Date('2024-01-07T19:00:00'), new Date('2024-01-14T11:00:00'), new Date('2024-01-14T13:00:00')];
+     //[new Date('2024-01-07T11:00:00'), new Date('2024-01-07T13:00:00'), new Date('2024-01-07T17:00:00'), new Date('2024-02-02T17:00:00'), new Date('2024-01-07T19:00:00'), new Date('2024-01-14T11:00:00'), new Date('2024-01-14T13:00:00')];
 
     this.name = new FormControl(this.bookingMsg.name, [
       Validators.required,
@@ -103,10 +107,7 @@ export class CalendarComponent {
       Validators.max(16),
     ]);
 
-    this.date = new FormControl(
-      formatDate(this.bookingMsg.date, 'yyyy-MM-dd', 'en'),
-      [Validators.required]
-    );
+    this.time = new FormControl(this.bookingMsg.date, Validators.required);
 
     this.msg = new FormControl(this.bookingMsg.msg, [
       Validators.minLength(8),
@@ -122,7 +123,7 @@ export class CalendarComponent {
     })
 
     this.timeTableForm = this.formBuilder.group({
-      date: this.date,
+      time: this.time,
     })
 
     this.bookingForm = this.formBuilder.group({
@@ -135,9 +136,31 @@ export class CalendarComponent {
       under_sixteen: this.under_sixteen,
       check_politiques: this.check_politiques,
     })
+
+    this.loadReservations();
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+  }
+
+  loadReservations(): void {
+    this.reservationService.getAll().subscribe((data: Reservation[]) => {
+      this.reservations = data;
+      console.log('cal');
+      this.datesToHighlight = this.availableDays(this.reservations);
+    })
+  }
+
+  availableDays(reservs: Reservation[]): Date[] {
+    let dates: Date[] = [];
+
+    reservs.forEach((res: Reservation) => {
+      dates.push(new Date(res.date));
+    });
+    console.log(dates);
+
+    return dates;
+  }
 
   calculateGames(date: Date): number {
     return this.datesToHighlight.filter((d) => d.getDate() === date.getDate()).length;
@@ -171,19 +194,23 @@ export class CalendarComponent {
 
   onSelect(event: any){
     console.log(event);
-    this.selectedDate= event;
+    this.selectedDate = event._d;
+    console.log(this.selectedDate);
   }
 
   submit(): void {
     this.isValidForm = false;
     this.processing = true;
 
-    if (this.calendarForm.invalid) {
+    if (this.bookingForm.invalid) {
       return;
     }
 
     this.isValidForm = true;
-    this.bookingMsg = this.calendarForm.value;
+    this.bookingMsg = this.bookingForm.value;
+    const hours = parseInt(this.timeTableForm.value.time);
+    this.reservationDate = new Date(this.selectedDate.setHours(hours));
+    console.log(this.reservationDate);
 
     const booking: BookingDTO = {
       name: this.bookingMsg.name,
@@ -191,14 +218,33 @@ export class CalendarComponent {
       mobile_phone: this.bookingMsg.mobile_phone,
       activity: this.bookingMsg.activity,
       num_players: this.bookingMsg.num_players,
-      date: this.bookingMsg.date,
+      date: this.reservationDate.toLocaleString("en-GB"),
       msg: this.bookingMsg.msg,
       under_sixteen: this.bookingMsg.under_sixteen,
       check_politiques: this.bookingMsg.check_politiques,
-      isBooking: this.bookingMsg.isBooking,
+      isBooking: true,
     };
 
-    // console.log( contact );
+    const reservation: Reservation = {
+      name: this.bookingMsg.name,
+      email: this.bookingMsg.email,
+      phone: this.bookingMsg.mobile_phone,
+      activity: this.bookingMsg.activity,
+      num_players: this.bookingMsg.num_players,
+      date: formatDate(this.reservationDate, 'yyyy-MM-dd HH:mm:ss', 'en'),
+      msg: this.bookingMsg.msg,
+    }
+
+    this.reservationService.create(reservation).subscribe({
+      next: (response: HttpResponse<any>) => {
+        if (response.ok) {
+          console.log('Reservation created');
+        }
+      },
+      error: (error: any) => {
+        console.error('Error sending email:', error);
+      }
+    })
 
     this.formMailService.sendEmail(booking).subscribe({
       next: (response: HttpResponse<any>) => {

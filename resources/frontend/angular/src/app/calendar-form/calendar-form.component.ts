@@ -61,7 +61,7 @@ export class CalendarFormComponent {
   showMessage: boolean;
 
   constructor (private formBuilder: FormBuilder, private formMailService: FormMailService) {
-    this.bookingMsg = new BookingDTO('', '', '', '', 8, new Date(), '', false, false, true);
+    this.bookingMsg = new BookingDTO('', '', '', '', 8, '', '', false, false, true);
 
     this.isValidForm = null;
     this.processing = false;

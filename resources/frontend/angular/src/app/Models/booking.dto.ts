@@ -4,7 +4,7 @@ export class BookingDTO {
     mobile_phone: string;
     activity: string;
     num_players: number;
-    date: Date;
+    date: string;
     msg: string;
     under_sixteen: boolean;
     check_politiques: boolean;
@@ -16,7 +16,7 @@ export class BookingDTO {
       mobile_phone: string,
       activity: string,
       num_players: number,
-      date: Date,
+      date: string,
       msg: string,
       under_sixteen: boolean,
       check_politiques: boolean,
