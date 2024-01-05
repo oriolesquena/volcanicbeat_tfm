@@ -1,28 +1,41 @@
 <div class="flex flex-col justify-center items-center gap-16 bg-vb-dark w-5/6 py-16 mx-auto mt-20 mb-12">
     <h1 class="font-display text-white text-4xl font-bold">CALENDARI DE RESERVA</h1>
-    <mat-stepper #stepper class="w-5/6 bg-vb-dark">
+    <mat-stepper linear #stepper class="w-5/6 bg-vb-dark">
         <mat-step [stepControl]="calendarForm">
+            <ng-template matStepLabel>Escull una data</ng-template>
             <mat-card class="demo-inline-calendar-card">
                 <mat-calendar *ngIf="datesToHighlight.length > 0" [dateClass]="dateClass()" [selected]="selectedDate"
                     (selectedChange)="onSelect($event)"></mat-calendar>
             </mat-card>
+            <div class="flex flex-row justify-center items-center gap-2 mt-8">
+                <button type="button" mat-mini-fab matStepperPrevious disabled><mat-icon>arrow_back</mat-icon></button>
+                <button type="button" mat-mini-fab matStepperNext color="primary"
+                    [disabled]="!selectedDate"><mat-icon>arrow_forward</mat-icon></button>
+            </div>
         </mat-step>
         <mat-step [stepControl]="timeTableForm">
+            <ng-template matStepLabel>Escull una hora</ng-template>
             <form [formGroup]="timeTableForm" (ngSubmit)="submit()" class="flex flex-col justify-center items-center">
                 <section>
                     <mat-form-field appearance="outline">
                         <mat-label>Hora</mat-label>
                         <mat-select [formControl]="time">
-                            <mat-option value="9">9:00h</mat-option>
-                            <mat-option value="11">11:00h</mat-option>
-                            <mat-option value="15">15:00h</mat-option>
-                            <mat-option value="17" disabled>17:00h</mat-option>
+                            <mat-option *ngFor="let hour of displayHours" [value]="hour">{{
+                                hour.toString().concat(":00h")
+                                }}</mat-option>
                         </mat-select>
                     </mat-form-field>
                 </section>
+                <div class="flex flex-row justify-center items-center gap-2">
+                    <button type="button" mat-mini-fab matStepperPrevious
+                        color="primary"><mat-icon>arrow_back</mat-icon></button>
+                    <button type="button" mat-mini-fab matStepperNext color="primary"
+                        [disabled]="!time.value"><mat-icon>arrow_forward</mat-icon></button>
+                </div>
             </form>
         </mat-step>
         <mat-step [stepControl]="bookingForm">
+            <ng-template matStepLabel>Completa amb les teves dades</ng-template>
             <form [formGroup]="bookingForm" (ngSubmit)="submit()" class="flex flex-col justify-center items-center">
                 <section>
                     <mat-form-field appearance="outline" class="w-800">
@@ -126,7 +139,12 @@
                         </mat-error>
                     </mat-checkbox>
                 </section>
-
+                <section class="flex flex-row justify-center items-center gap-2">
+                    <button type="button" mat-mini-fab matStepperPrevious
+                        color="primary"><mat-icon>arrow_back</mat-icon></button>
+                    <button type="button" mat-mini-fab matStepperNext
+                        disabled><mat-icon>arrow_forward</mat-icon></button>
+                </section>
                 <section class="text-white mt-4">
                     <button mat-raised-button type="submit" [disabled]="!bookingForm.valid || processing"
                         *ngIf="!processing && !showMessage" class="booking-button">Enviar</button>

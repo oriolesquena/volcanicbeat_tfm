@@ -7,6 +7,8 @@ import {
   Validators,
 } from '@angular/forms';
 
+import { Router } from '@angular/router';
+
 import { FormMailService } from '../Services/form-mail.service';
 import { HttpResponse } from '@angular/common/http';
 import { BookingDTO } from '../Models/booking.dto';
@@ -70,9 +72,11 @@ export class CalendarComponent {
   showMessage: boolean;
 
   datesToHighlight: Date[] = [];
+  hoursTimeTable: number[] = [9, 11, 15, 17];
+  displayHours: number[] = [];
   reservationDate: Date = new Date();
 
-  constructor (private formBuilder: FormBuilder, private formMailService: FormMailService, public reservationService: ReservationService) {
+  constructor (private formBuilder: FormBuilder, private formMailService: FormMailService, public reservationService: ReservationService, private router: Router) {
     this.bookingMsg = new BookingDTO('', '', '', '', 8, '', '', false, false, true);
 
     this.isValidForm = null;
@@ -93,6 +97,7 @@ export class CalendarComponent {
     ]);
 
     this.mobile_phone = new FormControl(this.bookingMsg.mobile_phone, [
+      Validators.required,
       Validators.minLength(9),
       Validators.maxLength(13),
       Validators.pattern('[- +()0-9]+'),
@@ -193,9 +198,19 @@ export class CalendarComponent {
   }
 
   onSelect(event: any){
-    console.log(event);
     this.selectedDate = event._d;
     console.log(this.selectedDate);
+    this.availableHours(this.selectedDate);
+  }
+
+  availableHours(date: Date): void {
+    date = new Date(date);
+    const gamesPerDate = this.datesToHighlight.filter((d) => 
+      d.getDate() === date.getDate()
+    )
+    const gameHours = gamesPerDate.map((games) => games.getHours());
+    this.displayHours = this.hoursTimeTable.filter(hour => !gameHours.includes(hour));
+    console.log(this.displayHours);
   }
 
   submit(): void {
@@ -242,7 +257,7 @@ export class CalendarComponent {
         }
       },
       error: (error: any) => {
-        console.error('Error sending email:', error);
+        console.error('Error posting reservation:', error);
       }
     })
 
@@ -258,6 +273,7 @@ export class CalendarComponent {
           }, 800);
           setTimeout(() => {
             this.showMessage = false;
+            window.location.reload();
           }, 3500);
         }
       },

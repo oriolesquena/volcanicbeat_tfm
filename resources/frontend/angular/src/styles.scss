@@ -115,6 +115,10 @@ html {
   color: rgb(255 255 255 / 80%) !important;
 }
 
+.mat-step-label.mat-step-label-active {
+  color: rgb(255 255 255 / 80%) !important;
+}
+
 .one-game>span.mat-calendar-body-cell-content:not(.mat-calendar-body-selected) {
   background-color: rgb(213 192 53 / 44%);
 }
