@@ -1,4 +1,5 @@
-import { NgModule } from '@angular/core';
+  import { NgModule } from '@angular/core';
+import { CommonModule, NgIf } from '@angular/common';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 import { FormMailService } from './Services/form-mail.service';
@@ -30,6 +31,7 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import {MatCardModule} from '@angular/material/card';
 import {MatStepperModule} from '@angular/material/stepper';
+import {MatSidenavModule} from '@angular/material/sidenav';
 
 import { ActivitiesComponent } from './activities/activities.component';
 import { GalleryComponent } from './gallery/gallery.component';
@@ -51,6 +53,8 @@ import { BookingComponent } from './booking/booking.component';
   ],
   imports: [
     HeaderComponent,
+    CommonModule,
+    NgIf,
     BrowserModule,
     HttpClientModule,
     AppRoutingModule,
@@ -68,7 +72,8 @@ import { BookingComponent } from './booking/booking.component';
     MatDatepickerModule,
     MatNativeDateModule,
     MatCardModule,
-    MatStepperModule
+    MatStepperModule,
+    MatSidenavModule
   ],
   providers: [FormMailService],
   bootstrap: [AppComponent]
