@@ -1,8 +1,9 @@
-<div class="flex flex-col justify-center items-center gap-16 bg-vb-dark w-5/6 py-16 mx-auto mt-20 mb-12">
+<div
+    class="flex flex-col justify-center items-center gap-16 bg-vb-dark w-5/6 py-10 md:py-16 mx-auto mt-10 md:mt-20 mb-12">
     <h1 class="font-display text-white text-4xl font-bold">CONTACTA'NS</h1>
     <form [formGroup]="contactForm" (ngSubmit)="submit()" class="flex flex-col justify-center items-center">
         <section>
-            <mat-form-field appearance="outline" class="w-800">
+            <mat-form-field appearance="outline" class="w-[70vw] lg:w-800">
                 <mat-label>Nom i cognoms: </mat-label>
                 <input matInput type="text" [formControl]="name" required />
                 <mat-error *ngIf="name.hasError('required') && name.dirty && name.touched">
@@ -17,7 +18,7 @@
             </mat-form-field>
         </section>
         <section>
-            <mat-form-field appearance="outline" class="w-800">
+            <mat-form-field appearance="outline" class="w-[70vw] lg:w-800">
                 <mat-label>Correu electrònic: </mat-label>
                 <input matInput type="email" [formControl]="email" required />
                 <mat-error *ngIf="email.hasError('pattern') && !email.hasError('required') && email.dirty">
@@ -29,7 +30,7 @@
             </mat-form-field>
         </section>
         <section>
-            <mat-form-field appearance="outline" class="w-800">
+            <mat-form-field appearance="outline" class="w-[70vw] lg:w-800">
                 <mat-label>Telèfon mòbil: </mat-label>
                 <input matInput type="text" [formControl]="mobile_phone" />
                 <mat-error *ngIf="mobile_phone.hasError('minlength') && mobile_phone.dirty">
@@ -45,7 +46,7 @@
             </mat-form-field>
         </section>
         <section>
-            <mat-form-field appearance="outline" class="w-800">
+            <mat-form-field appearance="outline" class="w-[70vw] lg:w-800">
                 <mat-label>Assumpte: </mat-label>
                 <input matInput type="text" [formControl]="title" required />
                 <mat-error *ngIf="title.hasError('required') && title.dirty">
@@ -60,7 +61,7 @@
             </mat-form-field>
         </section>
         <section>
-            <mat-form-field appearance="outline" class="w-800">
+            <mat-form-field appearance="outline" class="w-[70vw] lg:w-800">
                 <mat-label>Missatge: </mat-label>
                 <textarea matInput type="text" [formControl]="msg" required
                     placeholder="Escriu aquí el teu missatge..."></textarea>
@@ -75,7 +76,7 @@
                 </mat-error>
             </mat-form-field>
         </section>
-        <section>
+        <section class="w-10/12 mx-auto">
             <mat-checkbox [formControl]="check_politiques" color="primary" required>
                 <p class="contents text-white">Estic d'acord amb les <a href="./condicions-us-de-les-dades-personals"
                         class="underline">condicions d'ús de les dades

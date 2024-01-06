@@ -1,8 +1,9 @@
 <div class="flex justify-center lg:justify-around bg-vb-green h-32 py-4">
-    <div class="w-logo cursor-pointer duration-500 hover:w-logo-plus my-auto lg:hidden xl:inline mx-auto">
+    <div
+        class="w-logo cursor-pointer duration-500 hover:w-logo-plus my-auto mx-auto hidden sm:inline lg:hidden xl:inline">
         <img src="./assets/img/7.svg" class="bg-white" (click)="home()">
     </div>
-    <div class="w-[190px] cursor-pointer duration-500 hover:w-logo-plus my-auto hidden lg:inline xl:hidden">
+    <div class="w-[190px] cursor-pointer duration-500 hover:w-logo-plus my-auto mx-auto sm:hidden lg:inline xl:hidden">
         <img src="./assets/img/10.svg" class="bg-white" (click)="home()">
     </div>
     <!--
@@ -17,7 +18,7 @@
     </div>
 -->
 
-    <div class="hidden justify-evenly items-center text-white lg:flex">
+    <div class="hidden justify-evenly items-center text-white lg:flex mx-auto">
         <button (click)="home()" class="mx-4 duration-500 hover:text-lg">Inici</button>
         <button (click)="about()" class="mx-4 duration-500 hover:text-lg">Qui som</button>
         <button (click)="activities()" class="mx-4 duration-500 hover:text-lg">Serveis</button>
