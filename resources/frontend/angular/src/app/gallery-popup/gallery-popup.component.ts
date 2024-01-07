@@ -7,16 +7,13 @@ import {
   MatDialogTitle,
   MatDialogContent,
 } from '@angular/material/dialog';
-import { GalleryPopupComponent } from '../gallery-popup/gallery-popup.component';
-import {MatButtonModule} from '@angular/material/button';
-import {MatIconModule} from '@angular/material/icon';
 
 @Component({
-  selector: 'app-gallery',
-  templateUrl: './gallery.component.html',
-  styleUrls: ['./gallery.component.scss']
+  selector: 'app-gallery-popup',
+  templateUrl: './gallery-popup.component.html',
+  styleUrls: ['./gallery-popup.component.scss']
 })
-export class GalleryComponent {
+export class GalleryPopupComponent {
   imageGallery = [
     { url: '/assets/angular/assets/img/imageGallery/_SM49300.jpg'},
     { url: '/assets/angular/assets/img/imageGallery/_SM49303.jpg'},
@@ -38,18 +35,39 @@ export class GalleryComponent {
     { url: '/assets/angular/assets/img/imageGallery/DSC_2221.jpg'},
     { url: '/assets/angular/assets/img/imageGallery/DSC_2225.jpg'},
   ];
-  currentImg: string;
+  currImg: string | null | undefined;
+  nextImg: string;
+  backImg: string;
+  indexImg: number;
 
-  constructor(public dialog: MatDialog) {
-    this.currentImg = "";
+  constructor(public dialogRef: MatDialogRef<GalleryPopupComponent>) {
+    this.nextImg = "";
+    this.backImg = "";
+    this.indexImg = 0;
   }
 
-  openDialog(event: any, enterAnimationDuration: string, exitAnimationDuration: string): void {
-    this.dialog.open(GalleryPopupComponent, {
-      enterAnimationDuration,
-      exitAnimationDuration,
-    });
-    this.currentImg = event.srcElement.attributes.src.value;
-    document.getElementById('dialogImg')?.setAttribute('src', this.currentImg);
+  defineChangeImg(): void {
+    this.currImg = document.getElementById('dialogImg')?.getAttribute('src');
+    this.indexImg = this.imageGallery.findIndex((img) => img.url === this.currImg)
+    if (this.indexImg === 0) {
+      this.backImg = this.imageGallery[this.imageGallery.length - 1].url;
+      this.nextImg = this.imageGallery[this.indexImg + 1].url;
+    } else if (this.indexImg === (this.imageGallery.length - 1)) {
+      this.nextImg = this.imageGallery[0].url;
+      this.backImg = this.imageGallery[this.indexImg - 1].url;
+    } else {
+      this.nextImg = this.imageGallery[this.indexImg + 1].url;
+      this.backImg = this.imageGallery[this.indexImg - 1].url;
+    }
+  }
+
+  forwardImg(): void {
+    this.defineChangeImg();
+    document.getElementById('dialogImg')?.setAttribute('src', this.nextImg);
+  }
+
+  backwardImg(): void {
+    this.defineChangeImg();
+    document.getElementById('dialogImg')?.setAttribute('src', this.backImg);
   }
 }

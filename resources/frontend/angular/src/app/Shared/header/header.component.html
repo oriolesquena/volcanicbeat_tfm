@@ -1,9 +1,10 @@
 <div class="flex justify-center lg:justify-around bg-vb-green h-32 py-4">
     <div
-        class="w-logo cursor-pointer duration-500 hover:w-logo-plus my-auto mx-auto hidden sm:inline lg:hidden xl:inline">
+        class="w-logo cursor-pointer duration-500 lg:hover:w-logo-plus my-auto mx-auto hidden sm:inline lg:hidden xl:inline">
         <img src="./assets/img/7.svg" class="bg-white" (click)="home()">
     </div>
-    <div class="w-[190px] cursor-pointer duration-500 hover:w-logo-plus my-auto mx-auto sm:hidden lg:inline xl:hidden">
+    <div
+        class="w-[190px] cursor-pointer duration-500 lg:hover:w-logo-plus my-auto mx-auto sm:hidden lg:inline xl:hidden">
         <img src="./assets/img/10.svg" class="bg-white" (click)="home()">
     </div>
     <!--
@@ -25,12 +26,12 @@
         <button (click)="prices()" class="mx-4 duration-500 hover:text-lg">Preus</button>
         <button (click)="booking()" class="mx-4 duration-500 hover:text-lg">Reservar</button>
         <button (click)="contact()" class="mx-4 duration-500 hover:text-lg">Contacte</button>
-        <button (click)="about()" class="mx-4 duration-500 hover:text-lg">Normativa</button>
+        <button (click)="normativa()" class="mx-4 duration-500 hover:text-lg">Normativa</button>
         <button (click)="gallery()" class="mx-4 duration-500 hover:text-lg">Galeria</button>
         <a href="https://instagram.com/volcanic_beat" target="_blank" class="mx-4 duration-500 hover:text-lg"><fa-icon
                 [icon]="faInstagram"></fa-icon></a>
     </div>
-    <div class="flex items-center justify-center me-4 z-20 lg:hidden">
+    <div class="flex items-center justify-center me-4 z-30 lg:hidden">
         <button *ngIf="!showNavMenu" type="button" mat-icon-button (click)="navMenu()">
             <mat-icon class="text-white">menu</mat-icon>
         </button>
@@ -39,14 +40,14 @@
         </button>
     </div>
     <div *ngIf="showNavMenu"
-        class="absolute top-0 left-0 w-screen h-screen flex flex-col justify-evenly items-center text-white bg-vb-green py-10 z-10">
+        class="absolute top-0 left-0 w-screen h-screen flex flex-col justify-evenly items-center text-white bg-vb-green py-10 z-20">
         <button (click)="home()" class="mx-4 duration-500 hover:text-lg">Inici</button>
         <button (click)="about()" class="mx-4 duration-500 hover:text-lg">Qui som</button>
         <button (click)="activities()" class="mx-4 duration-500 hover:text-lg">Serveis</button>
         <button (click)="prices()" class="mx-4 duration-500 hover:text-lg">Preus</button>
         <button (click)="booking()" class="mx-4 duration-500 hover:text-lg">Reservar</button>
         <button (click)="contact()" class="mx-4 duration-500 hover:text-lg">Contacte</button>
-        <button (click)="about()" class="mx-4 duration-500 hover:text-lg">Normativa</button>
+        <button (click)="normativa()" class="mx-4 duration-500 hover:text-lg">Normativa</button>
         <button (click)="gallery()" class="mx-4 duration-500 hover:text-lg">Galeria</button>
         <a href="https://instagram.com/volcanic_beat" target="_blank" class="mx-4 duration-500 hover:text-lg"><fa-icon
                 [icon]="faInstagram"></fa-icon></a>

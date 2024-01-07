@@ -7,6 +7,7 @@ import { PricesComponent } from './prices/prices.component';
 import { ContactComponent } from './contact/contact.component';
 import { GalleryComponent } from './gallery/gallery.component';
 import { BookingComponent } from './booking/booking.component';
+import { NormativaComponent } from './normativa/normativa.component';
 
 const routes: Routes = [
   {
@@ -36,6 +37,10 @@ const routes: Routes = [
   {
     path: 'contact',
     component: ContactComponent,
+  },
+  {
+    path: 'normativa',
+    component: NormativaComponent,
   },
   {
     path: 'gallery',

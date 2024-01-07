@@ -49,6 +49,11 @@ export class HeaderComponent {
       this.showNavMenu = false;
     }
 
+    normativa(): void {
+      this.router.navigateByUrl('normativa');
+      this.showNavMenu = false;
+    }
+
     gallery(): void {
       this.router.navigateByUrl('gallery');
       this.showNavMenu = false;

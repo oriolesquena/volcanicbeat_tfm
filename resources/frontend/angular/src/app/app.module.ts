@@ -11,7 +11,7 @@ import { AboutComponent } from './about/about.component';
 import { PricesComponent } from './prices/prices.component';
 import { ContactComponent } from './contact/contact.component';
 import { CalendarComponent } from './calendar/calendar.component';
-import { CalendarFormComponent } from './calendar-form/calendar-form.component';
+import { CalendarFormComponent } from './calendar-old/calendar-form.component';
 import { HeaderComponent } from './Shared/header/header.component';
 import { FooterComponent } from './Shared/footer/footer.component';
 import { ContactFormComponent } from './contact-form/contact-form.component';
@@ -32,10 +32,13 @@ import { MatNativeDateModule } from '@angular/material/core';
 import {MatCardModule} from '@angular/material/card';
 import {MatStepperModule} from '@angular/material/stepper';
 import {MatSidenavModule} from '@angular/material/sidenav';
+import {MatDialogModule} from '@angular/material/dialog';
 
 import { ActivitiesComponent } from './activities/activities.component';
 import { GalleryComponent } from './gallery/gallery.component';
+import { GalleryPopupComponent } from './gallery-popup/gallery-popup.component';
 import { BookingComponent } from './booking/booking.component';
+import { NormativaComponent } from './normativa/normativa.component';
 
 @NgModule({
   declarations: [
@@ -49,7 +52,9 @@ import { BookingComponent } from './booking/booking.component';
     ContactFormComponent,
     ActivitiesComponent,
     GalleryComponent,
-    BookingComponent
+    GalleryPopupComponent,
+    BookingComponent,
+    NormativaComponent
   ],
   imports: [
     HeaderComponent,
@@ -73,7 +78,8 @@ import { BookingComponent } from './booking/booking.component';
     MatNativeDateModule,
     MatCardModule,
     MatStepperModule,
-    MatSidenavModule
+    MatSidenavModule,
+    MatDialogModule
   ],
   providers: [FormMailService],
   bootstrap: [AppComponent]

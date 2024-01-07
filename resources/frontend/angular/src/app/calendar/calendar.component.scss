@@ -1,5 +1,4 @@
 .demo-inline-calendar-card {
-    width: calc(300px + 10vw);
     margin: auto;
 }
 
@@ -16,6 +15,13 @@ mat-calendar {
 .mat-stepper-vertical {
     background-color: rgb(38 38 38 / var(--tw-bg-opacity));
     color: white;
+}
+
+@media (min-width: 640px) {
+    .demo-inline-calendar-card {
+        width: calc(300px + 10vw);
+        margin: auto;
+    }
 }
 
 
