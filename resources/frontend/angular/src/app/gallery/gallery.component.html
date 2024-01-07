@@ -1,8 +1,9 @@
 <div>
-    <iframe width="780" height="600" src="https://www.youtube.com/embed/yfCwB7yuJdY" frameborder="0"
+    <iframe width="780" height="439" src="https://www.youtube.com/embed/yfCwB7yuJdY" frameborder="0"
         allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen
-        title="Laser Tag POV - Volcanic Beat" class="w-1/2 min-h-max mx-auto rounded-md shadow-lg my-10"></iframe>
+        title="Laser Tag POV - Volcanic Beat"
+        class="mx-auto max-w-[80vw] max-h-[45vw] rounded-md shadow-lg my-10"></iframe>
 </div>
-<div class="grid grid-cols-3 gap-4 w-1/2 mx-auto">
+<div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 max-w-[80vw] xl:w-1000 mx-auto mt-12">
     <div *ngFor="let img of imageGallery" class=""><img src="{{ img.url }}"></div>
 </div>

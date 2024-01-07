@@ -10,4 +10,20 @@ mat-calendar {
 .mat-stepper-horizontal {
     background-color: rgb(38 38 38 / var(--tw-bg-opacity));
     color: white;
+    display: none;
+}
+
+.mat-stepper-vertical {
+    background-color: rgb(38 38 38 / var(--tw-bg-opacity));
+    color: white;
+}
+
+
+@media (min-width: 1024px) {
+    .mat-stepper-horizontal {
+        display: block;
+    }
+    .mat-stepper-vertical {
+        display: none;
+    }
 }
