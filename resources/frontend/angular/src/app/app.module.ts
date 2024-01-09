@@ -18,6 +18,7 @@ import { ContactFormComponent } from './contact-form/contact-form.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { ReactiveFormsModule } from '@angular/forms';
+import { NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer';
 
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatButtonModule} from '@angular/material/button';
@@ -39,6 +40,7 @@ import { GalleryComponent } from './gallery/gallery.component';
 import { GalleryPopupComponent } from './gallery-popup/gallery-popup.component';
 import { BookingComponent } from './booking/booking.component';
 import { NormativaComponent } from './normativa/normativa.component';
+import { ExamplePdfViewerComponent } from './example-pdf-viewer/example-pdf-viewer.component';
 
 @NgModule({
   declarations: [
@@ -54,7 +56,8 @@ import { NormativaComponent } from './normativa/normativa.component';
     GalleryComponent,
     GalleryPopupComponent,
     BookingComponent,
-    NormativaComponent
+    NormativaComponent,
+    ExamplePdfViewerComponent
   ],
   imports: [
     HeaderComponent,
@@ -79,7 +82,8 @@ import { NormativaComponent } from './normativa/normativa.component';
     MatCardModule,
     MatStepperModule,
     MatSidenavModule,
-    MatDialogModule
+    MatDialogModule,
+    NgxExtendedPdfViewerModule
   ],
   providers: [FormMailService],
   bootstrap: [AppComponent]
