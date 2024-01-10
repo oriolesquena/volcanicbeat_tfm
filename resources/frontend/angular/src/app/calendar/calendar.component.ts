@@ -270,7 +270,7 @@ export class CalendarComponent {
             this.bookingForm.reset();
             this.processing = false;
             this.showMessage = true;
-          }, 800);
+          }, 400);
           setTimeout(() => {
             this.showMessage = false;
             window.location.reload();

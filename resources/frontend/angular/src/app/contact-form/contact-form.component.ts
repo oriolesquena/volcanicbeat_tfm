@@ -110,7 +110,7 @@ export class ContactFormComponent implements OnInit {
             this.contactForm.reset();
             this.processing = false;
             this.showMessage = true;
-          }, 800);
+          }, 400);
           setTimeout(() => {
             this.showMessage = false;
           }, 3500);
