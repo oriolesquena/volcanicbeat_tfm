@@ -151,7 +151,6 @@ export class CalendarComponent {
   loadReservations(): void {
     this.reservationService.getAll().subscribe((data: Reservation[]) => {
       this.reservations = data;
-      console.log('cal');
       this.datesToHighlight = this.availableDays(this.reservations);
     })
   }

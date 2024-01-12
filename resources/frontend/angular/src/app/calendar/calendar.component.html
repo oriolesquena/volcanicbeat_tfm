@@ -16,7 +16,8 @@
         </mat-step>
         <mat-step [stepControl]="timeTableForm">
             <ng-template matStepLabel>Escull una hora</ng-template>
-            <form [formGroup]="timeTableForm" (ngSubmit)="submit()" class="flex flex-col justify-center items-center">
+            <form [formGroup]="timeTableForm" (ngSubmit)="submit()"
+                class="flex flex-col justify-center items-center mt-4">
                 <section>
                     <mat-form-field appearance="outline">
                         <mat-label>Hora</mat-label>
@@ -37,7 +38,8 @@
         </mat-step>
         <mat-step [stepControl]="bookingForm">
             <ng-template matStepLabel>Completa amb les teves dades</ng-template>
-            <form [formGroup]="bookingForm" (ngSubmit)="submit()" class="flex flex-col justify-center items-center">
+            <form [formGroup]="bookingForm" (ngSubmit)="submit()"
+                class="flex flex-col justify-center items-center mt-4">
                 <section>
                     <mat-form-field appearance="outline" class="w-[70vw] sm:w-[60vw] xl:w-800">
                         <mat-label>Nom i cognoms: </mat-label>
@@ -140,7 +142,7 @@
                         </mat-error>
                     </mat-checkbox>
                 </section>
-                <section class="flex flex-row justify-center items-center gap-2">
+                <section class="flex flex-row justify-center items-center gap-2 my-4">
                     <button type="button" mat-mini-fab matStepperPrevious
                         color="primary"><mat-icon>arrow_back</mat-icon></button>
                     <button type="button" mat-mini-fab matStepperNext
@@ -171,7 +173,8 @@
         </mat-step>
         <mat-step [stepControl]="timeTableForm">
             <ng-template matStepLabel>Escull una hora</ng-template>
-            <form [formGroup]="timeTableForm" (ngSubmit)="submit()" class="flex flex-col justify-center items-center">
+            <form [formGroup]="timeTableForm" (ngSubmit)="submit()"
+                class="flex flex-col justify-center items-center mt-4">
                 <section>
                     <mat-form-field appearance="outline">
                         <mat-label>Hora</mat-label>
@@ -192,7 +195,8 @@
         </mat-step>
         <mat-step [stepControl]="bookingForm">
             <ng-template matStepLabel>Completa amb les teves dades</ng-template>
-            <form [formGroup]="bookingForm" (ngSubmit)="submit()" class="flex flex-col justify-center items-center">
+            <form [formGroup]="bookingForm" (ngSubmit)="submit()"
+                class="flex flex-col justify-center items-center mt-4">
                 <section>
                     <mat-form-field appearance="outline" class="w-[70vw] sm:w-[60vw] xl:w-800">
                         <mat-label>Nom i cognoms: </mat-label>
@@ -295,7 +299,7 @@
                         </mat-error>
                     </mat-checkbox>
                 </section>
-                <section class="flex flex-row justify-center items-center gap-2">
+                <section class="flex flex-row justify-center items-center gap-2 my-4">
                     <button type="button" mat-mini-fab matStepperPrevious
                         color="primary"><mat-icon>arrow_back</mat-icon></button>
                     <button type="button" mat-mini-fab matStepperNext

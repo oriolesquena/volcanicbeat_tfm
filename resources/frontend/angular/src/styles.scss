@@ -55,6 +55,7 @@ html, body {
 .mdc-notched-outline__notch
 {
   border-right: none;
+  border-left: none;
 }
 
 /* Change the border color */
@@ -64,12 +65,13 @@ html, body {
   border-color: #e8fbed !important;
 }
 
-/* Change the border width */
+/* Change the border width 
 .mdc-text-field--outlined:not(.mdc-text-field--disabled) .mdc-notched-outline .mdc-notched-outline__leading,
 .mdc-text-field--outlined:not(.mdc-text-field--disabled) .mdc-notched-outline .mdc-notched-outline__notch,
 .mdc-text-field--outlined:not(.mdc-text-field--disabled) .mdc-notched-outline .mdc-notched-outline__trailing {
   border-width: 1.5px !important;
-}
+} 
+*/
 
 .mdc-text-field--outlined:not(.mdc-text-field--disabled) .mdc-text-field__input {
   color: white !important;
@@ -151,6 +153,9 @@ html {
 .mat-calendar {
   .mat-mdc-icon-button {
     color: #3C4C41;
+  }
 }
 
+.cdk-overlay-pane {
+  max-width: 86vw !important;
 }
