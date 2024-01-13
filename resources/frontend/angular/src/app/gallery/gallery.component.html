@@ -6,5 +6,6 @@
 </div>
 <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 max-w-[80vw] xl:w-1000 mx-auto mt-12">
     <div *ngFor="let img of imageGallery; index as i" class=""><button
-            (click)="openDialog($event, '300ms', '150ms')"><img id="{{ i }}" src="{{ img.url }}"></button></div>
+            (click)="openDialog($event, '300ms', '150ms')"><img id="{{ i }}" src="{{ img.url }}"
+                loading="lazy"></button></div>
 </div>

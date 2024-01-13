@@ -1,9 +1,10 @@
 <div class="grid grid-cols-1 md:grid-cols-2 md:grid-rows-none">
     <video autoplay muted loop id="introVideo" preload="auto"
-        class="col-span-full row-start-1 w-screen max-h-70 min-h-[500px] object-cover hidden md:block">
+        class="col-span-full row-start-1 w-screen max-h-70 min-h-[500px] object-cover hidden md:block" loading="lazy">
         <source src="./assets/vid/intro.mp4" type="video/mp4">
     </video>
-    <img src="./assets/img/intro-no-vid.webp" class="col-span-full row-start-1 min-h-[300px] object-cover md:hidden">
+    <img src="./assets/img/intro-no-vid.webp" class="col-span-full row-start-1 min-h-[300px] object-cover md:hidden"
+        loading="lazy">
 
     <div
         class="z-10 col-start-1 row-start-1 bg-black/20 my-4 md:my-20 py-4 md:py-10 lg:py-0 mx-10 sm:mx-20 md:me-0 flex flex-col justify-center items-center gap-10">
@@ -36,7 +37,7 @@
 <div>
     <iframe width="780" height="439" src="https://www.youtube.com/embed/yfCwB7yuJdY" frameborder="0"
         allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen
-        title="Laser Tag POV - Volcanic Beat" class="mx-auto max-w-[80vw] max-h-[45vw]"></iframe>
+        title="Laser Tag POV - Volcanic Beat" class="mx-auto max-w-[80vw] max-h-[45vw]" loading="lazy"></iframe>
 </div>
 
 <app-contact-form></app-contact-form>
