@@ -11,7 +11,7 @@ import { Reservation } from '../Interfaces/reservation';
 })
 export class ReservationService {
 
-  private apiURL = "http://192.168.1.42:8000/api/reservation";
+  private apiURL = "http://localhost:8000/api/reservation";
 
   httpOptions = {
     headers: new HttpHeaders({
