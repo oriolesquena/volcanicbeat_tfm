@@ -5,9 +5,9 @@
         <mat-step [stepControl]="calendarForm">
             <ng-template matStepLabel>Escull una data</ng-template>
             <mat-card class="demo-inline-calendar-card">
-                <mat-calendar *ngIf="datesToHighlight.length > 0" [dateClass]="dateClass()" [selected]="selectedDate"
+                <mat-calendar [minDate]="minDate" [maxDate]="maxDate" [selected]="selectedDate"
                     (selectedChange)="onSelect($event)"></mat-calendar>
-            </mat-card>
+            </mat-card> <!-- [dateClass]="dateClass()" -->
             <div class="flex flex-row justify-center items-center gap-2 mt-8">
                 <button type="button" mat-mini-fab matStepperPrevious disabled><mat-icon>arrow_back</mat-icon></button>
                 <button type="button" mat-mini-fab matStepperNext color="primary"
@@ -162,7 +162,7 @@
         <mat-step [stepControl]="calendarForm">
             <ng-template matStepLabel>Escull una data</ng-template>
             <mat-card class="demo-inline-calendar-card">
-                <mat-calendar *ngIf="datesToHighlight.length > 0" [dateClass]="dateClass()" [selected]="selectedDate"
+                <mat-calendar [minDate]="minDate" [maxDate]="maxDate" [selected]="selectedDate"
                     (selectedChange)="onSelect($event)"></mat-calendar>
             </mat-card>
             <div class="flex flex-row justify-center items-center gap-2 mt-8">

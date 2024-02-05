@@ -67,6 +67,9 @@ export class CalendarComponent {
   timeTableForm: FormGroup;
   bookingForm: FormGroup;
 
+  minDate: Date;
+  maxDate: Date;
+
   isValidForm: boolean | null;
   processing: boolean;
   showMessage: boolean;
@@ -143,6 +146,11 @@ export class CalendarComponent {
     })
 
     this.loadReservations();
+
+    const currentDate = new Date();
+    const currentYear = currentDate.getFullYear();
+    this.minDate = new Date();
+    this.maxDate = new Date(currentDate.setFullYear(currentYear + 1)) // add one year;
   }
 
   ngOnInit(): void {
@@ -167,7 +175,7 @@ export class CalendarComponent {
   }
 
   calculateGames(date: Date): number {
-    return this.datesToHighlight.filter((d) => d.getDate() === date.getDate()).length;
+    return this.datesToHighlight.filter((d) => d.getDate() === date.getDate() && d.getMonth() === date.getMonth() && d.getFullYear() === date.getFullYear()).length;
   }
 
   dateClass() {
@@ -205,7 +213,7 @@ export class CalendarComponent {
   availableHours(date: Date): void {
     date = new Date(date);
     const gamesPerDate = this.datesToHighlight.filter((d) => 
-      d.getDate() === date.getDate()
+      d.getDate() === date.getDate()  && d.getMonth() === date.getMonth() && d.getFullYear() === date.getFullYear()
     )
     const gameHours = gamesPerDate.map((games) => games.getHours());
     this.displayHours = this.hoursTimeTable.filter(hour => !gameHours.includes(hour));
