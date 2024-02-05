@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { formatDate } from '@angular/common';
 import {
   FormBuilder,
@@ -70,6 +70,9 @@ export class CalendarComponent {
   minDate: Date;
   maxDate: Date;
 
+  minHour: string;
+  maxHour: string;
+
   isValidForm: boolean | null;
   processing: boolean;
   showMessage: boolean;
@@ -85,6 +88,14 @@ export class CalendarComponent {
     this.isValidForm = null;
     this.processing = false;
     this.showMessage = false;
+
+    const currentDate = new Date();
+    const currentYear = currentDate.getFullYear();
+    this.minDate = new Date();
+    this.maxDate = new Date(currentDate.setFullYear(currentYear + 1)) // add one year;
+
+    this.minHour = '09:00:00';
+    this.maxHour = '18:00:00';
     
      //[new Date('2024-01-07T11:00:00'), new Date('2024-01-07T13:00:00'), new Date('2024-01-07T17:00:00'), new Date('2024-02-02T17:00:00'), new Date('2024-01-07T19:00:00'), new Date('2024-01-14T11:00:00'), new Date('2024-01-14T13:00:00')];
 
@@ -146,11 +157,6 @@ export class CalendarComponent {
     })
 
     this.loadReservations();
-
-    const currentDate = new Date();
-    const currentYear = currentDate.getFullYear();
-    this.minDate = new Date();
-    this.maxDate = new Date(currentDate.setFullYear(currentYear + 1)) // add one year;
   }
 
   ngOnInit(): void {
@@ -172,36 +178,6 @@ export class CalendarComponent {
     console.log(dates);
 
     return dates;
-  }
-
-  calculateGames(date: Date): number {
-    return this.datesToHighlight.filter((d) => d.getDate() === date.getDate() && d.getMonth() === date.getMonth() && d.getFullYear() === date.getFullYear()).length;
-  }
-
-  dateClass() {
-    return (date: Date): MatCalendarCellCssClasses => {
-      date = new Date(date);
-      const highlightDate = this.datesToHighlight
-        .map(strDate => new Date(strDate))
-        .some(d => {
-          return d.getDate() === date.getDate() && d.getMonth() === date.getMonth() && d.getFullYear() === date.getFullYear()
-        });
-      
-      if (highlightDate) {
-        switch (this.calculateGames(date)) {
-          case 1:
-            return 'one-game';
-          case 2:
-            return 'two-games';
-          case 3:
-            return 'three-games';
-          default:
-            return 'full-games';
-        }
-      } else {
-        return '';
-      }
-    };
   }
 
   onSelect(event: any){

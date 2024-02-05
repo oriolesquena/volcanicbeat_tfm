@@ -1,4 +1,4 @@
-  import { NgModule } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { CommonModule, NgIf } from '@angular/common';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
@@ -20,20 +20,20 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ReactiveFormsModule } from '@angular/forms';
 import { NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer';
 
-import {MatCheckboxModule} from '@angular/material/checkbox';
-import {MatButtonModule} from '@angular/material/button';
-import {MatFormFieldModule} from '@angular/material/form-field';
-import {MatInputModule} from '@angular/material/input';
-import {MatIconModule} from '@angular/material/icon';
-import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
-import {MatGridListModule} from '@angular/material/grid-list';
-import {MatSelectModule} from '@angular/material/select';
-import {MatDatepickerModule} from '@angular/material/datepicker';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatButtonModule } from '@angular/material/button';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatIconModule } from '@angular/material/icon';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatGridListModule } from '@angular/material/grid-list';
+import { MatSelectModule } from '@angular/material/select';
+import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
-import {MatCardModule} from '@angular/material/card';
-import {MatStepperModule} from '@angular/material/stepper';
-import {MatSidenavModule} from '@angular/material/sidenav';
-import {MatDialogModule} from '@angular/material/dialog';
+import { MatCardModule } from '@angular/material/card';
+import { MatStepperModule } from '@angular/material/stepper';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatDialogModule } from '@angular/material/dialog';
 
 import { ActivitiesComponent } from './activities/activities.component';
 import { GalleryComponent } from './gallery/gallery.component';
@@ -41,6 +41,8 @@ import { GalleryPopupComponent } from './gallery-popup/gallery-popup.component';
 import { BookingComponent } from './booking/booking.component';
 import { NormativaComponent } from './normativa/normativa.component';
 import { ExamplePdfViewerComponent } from './example-pdf-viewer/example-pdf-viewer.component';
+
+import { IgxTimePickerModule, IgxToastModule  } from 'igniteui-angular';
 
 @NgModule({
   declarations: [
@@ -83,9 +85,12 @@ import { ExamplePdfViewerComponent } from './example-pdf-viewer/example-pdf-view
     MatStepperModule,
     MatSidenavModule,
     MatDialogModule,
-    NgxExtendedPdfViewerModule
+    NgxExtendedPdfViewerModule,
+    IgxTimePickerModule,
+    IgxToastModule
   ],
   providers: [FormMailService],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}
