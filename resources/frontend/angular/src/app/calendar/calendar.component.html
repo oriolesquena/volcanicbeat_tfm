@@ -22,8 +22,9 @@
                     <mat-form-field appearance="outline">
                         <mat-label>Hora</mat-label>
                         <mat-select [formControl]="time">
-                            <mat-option *ngFor="let hour of displayHours" [value]="hour">{{
-                                hour.toString().concat(":00h")
+                            <mat-option *ngFor="let hour of hoursTimeTable" [value]="hour"
+                                [disabled]="hoursNotAvailable.includes(hour)">{{
+                                hoursToString(hour)
                                 }}</mat-option>
                         </mat-select>
                     </mat-form-field>
@@ -176,8 +177,15 @@
             <form [formGroup]="timeTableForm" (ngSubmit)="submit()"
                 class="flex flex-col justify-center items-center mt-4">
                 <section>
-                    <igx-time-picker formControlName="time" [itemsDelta]="{hours:1, minutes:15}" [inputFormat]="'H:mm'"
-                        [minValue]="minHour" [maxValue]="maxHour"></igx-time-picker>
+                    <mat-form-field appearance="outline">
+                        <mat-label>Hora</mat-label>
+                        <mat-select [formControl]="time">
+                            <mat-option *ngFor="let hour of hoursTimeTable" [value]="hour"
+                                [disabled]="hoursNotAvailable.includes(hour)">{{
+                                hoursToString(hour)
+                                }}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
                 </section>
                 <div class="flex flex-row justify-center items-center gap-2">
                     <button type="button" mat-mini-fab matStepperPrevious

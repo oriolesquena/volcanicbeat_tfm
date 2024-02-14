@@ -70,16 +70,16 @@ export class CalendarComponent {
   minDate: Date;
   maxDate: Date;
 
-  minHour: string;
-  maxHour: string;
+  minHour: number = 9;
+  maxHour: number = 18;
 
   isValidForm: boolean | null;
   processing: boolean;
   showMessage: boolean;
 
   datesToHighlight: Date[] = [];
-  hoursTimeTable: number[] = [9, 11, 15, 17];
-  displayHours: number[] = [];
+  hoursTimeTable: number[] = [];
+  hoursNotAvailable: number[] = [13, 13.5, 14, 14.5]; // lunch hours
   reservationDate: Date = new Date();
 
   constructor (private formBuilder: FormBuilder, private formMailService: FormMailService, public reservationService: ReservationService, private router: Router) {
@@ -94,9 +94,6 @@ export class CalendarComponent {
     this.minDate = new Date();
     this.maxDate = new Date(currentDate.setFullYear(currentYear + 1)) // add one year;
 
-    this.minHour = '09:00:00';
-    this.maxHour = '18:00:00';
-    
      //[new Date('2024-01-07T11:00:00'), new Date('2024-01-07T13:00:00'), new Date('2024-01-07T17:00:00'), new Date('2024-02-02T17:00:00'), new Date('2024-01-07T19:00:00'), new Date('2024-01-14T11:00:00'), new Date('2024-01-14T13:00:00')];
 
     this.name = new FormControl(this.bookingMsg.name, [
@@ -156,10 +153,22 @@ export class CalendarComponent {
       check_politiques: this.check_politiques,
     })
 
+    this.createHoursTimeTable();
+
     this.loadReservations();
   }
 
   ngOnInit(): void {
+  }
+
+  createHoursTimeTable(): void {
+    for(let i = this.minHour; i < this.maxHour; i++) {
+        this.hoursTimeTable.push(i);
+        // this.hoursTimeTable.push(i + 0.25);
+        this.hoursTimeTable.push(i + 0.5);
+        // this.hoursTimeTable.push(i + 0.75);
+    }
+    console.log(this.hoursTimeTable);
   }
 
   loadReservations(): void {
@@ -183,6 +192,7 @@ export class CalendarComponent {
   onSelect(event: any){
     this.selectedDate = event._d;
     console.log(this.selectedDate);
+    this.hoursNotAvailable = [13, 13.5, 14, 14.5]; // reset to lunch hours
     this.availableHours(this.selectedDate);
   }
 
@@ -191,9 +201,31 @@ export class CalendarComponent {
     const gamesPerDate = this.datesToHighlight.filter((d) => 
       d.getDate() === date.getDate()  && d.getMonth() === date.getMonth() && d.getFullYear() === date.getFullYear()
     )
-    const gameHours = gamesPerDate.map((games) => games.getHours());
-    this.displayHours = this.hoursTimeTable.filter(hour => !gameHours.includes(hour));
-    console.log(this.displayHours);
+    const gameHours = gamesPerDate.map((games) => (games.getHours() + games.getMinutes()/60));
+    
+    gameHours.forEach(hour => {
+      this.hoursNotAvailable.push(hour);
+      this.hoursNotAvailable.push(hour + 0.5);
+      this.hoursNotAvailable.push(hour + 1);
+      this.hoursNotAvailable.push(hour + 1.5);
+    })
+
+    this.hoursNotAvailable.sort((a, b) => a - b);
+    
+    console.log(this.hoursNotAvailable);
+  }
+
+  hoursToString(numberHour: number): string {
+    let hours: number;
+    let minutes: string;
+
+    hours = Math.floor(numberHour);
+    minutes = ((numberHour-hours) * 60).toString();
+    if (minutes.length<2) {
+      minutes = minutes.concat("0");
+    }
+
+    return (hours.toString().concat(":").concat(minutes.concat("h")));
   }
 
   submit(): void {
@@ -207,7 +239,9 @@ export class CalendarComponent {
     this.isValidForm = true;
     this.bookingMsg = this.bookingForm.value;
     const hours = parseInt(this.timeTableForm.value.time);
+    const minutes = (hours - Math.floor(hours)) * 60;
     this.reservationDate = new Date(this.selectedDate.setHours(hours));
+    this.reservationDate.setMinutes(minutes);
     console.log(this.reservationDate);
 
     const booking: BookingDTO = {
