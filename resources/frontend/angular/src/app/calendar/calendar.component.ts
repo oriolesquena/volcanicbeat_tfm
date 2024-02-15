@@ -16,6 +16,8 @@ import { BookingDTO } from '../Models/booking.dto';
 import { ReservationService } from '../Services/reservation.service';
 import { Reservation } from '../Interfaces/reservation';
 
+import { SunsetService } from '../Services/sunset.service';
+
 import {MatCalendarCellCssClasses} from '@angular/material/datepicker';
 
 import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
@@ -71,7 +73,7 @@ export class CalendarComponent {
   maxDate: Date;
 
   minHour: number = 9;
-  maxHour: number = 18;
+  maxHour: number = 18; // by default, but later calculated depending on the sunset
 
   isValidForm: boolean | null;
   processing: boolean;
@@ -80,9 +82,10 @@ export class CalendarComponent {
   datesToHighlight: Date[] = [];
   hoursTimeTable: number[] = [];
   hoursNotAvailable: number[] = [13, 13.5, 14, 14.5]; // lunch hours
+  summerMonths: number[] = [6, 7, 8];
   reservationDate: Date = new Date();
 
-  constructor (private formBuilder: FormBuilder, private formMailService: FormMailService, public reservationService: ReservationService, private router: Router) {
+  constructor (private formBuilder: FormBuilder, private formMailService: FormMailService, public reservationService: ReservationService, public sunsetService: SunsetService) {
     this.bookingMsg = new BookingDTO('', '', '', '', 8, '', '', false, false, true);
 
     this.isValidForm = null;
@@ -93,8 +96,6 @@ export class CalendarComponent {
     const currentYear = currentDate.getFullYear();
     this.minDate = new Date();
     this.maxDate = new Date(currentDate.setFullYear(currentYear + 1)) // add one year;
-
-     //[new Date('2024-01-07T11:00:00'), new Date('2024-01-07T13:00:00'), new Date('2024-01-07T17:00:00'), new Date('2024-02-02T17:00:00'), new Date('2024-01-07T19:00:00'), new Date('2024-01-14T11:00:00'), new Date('2024-01-14T13:00:00')];
 
     this.name = new FormControl(this.bookingMsg.name, [
       Validators.required,
@@ -153,7 +154,7 @@ export class CalendarComponent {
       check_politiques: this.check_politiques,
     })
 
-    this.createHoursTimeTable();
+    this.calculateLastHour();
 
     this.loadReservations();
   }
@@ -161,13 +162,60 @@ export class CalendarComponent {
   ngOnInit(): void {
   }
 
+  stringToHourNumber(hour: string): number {
+    // converts hour to number and rounds it up to half or full hour
+
+    console.log(hour);
+
+    let sunsetHours: number = 18;
+    let sunsetMinutes: number = 0;
+    let arrayHours = hour.split(':');
+
+    if (hour.includes("PM")) {
+      sunsetHours = parseInt(arrayHours[0]) + 12;
+    } else {
+      sunsetHours = parseInt(arrayHours[0]);
+    }
+
+    sunsetMinutes = parseInt(arrayHours[1])/60;
+
+    if (sunsetMinutes < 0.25) {
+      sunsetMinutes = 0;
+    } else if (sunsetMinutes < 0.75) {
+      sunsetMinutes = 0.5;
+    } else {
+      sunsetMinutes = 0;
+      sunsetHours = sunsetHours + 1;
+    }
+
+    sunsetHours = sunsetHours + sunsetMinutes;
+
+    return sunsetHours;
+  }
+
+  calculateLastHour(): void {
+    let sunsetHour: number;
+    let currentDate: Date = new Date();
+
+    if (this.summerMonths.includes(currentDate.getMonth())) {
+      this.maxHour = 21;
+    } else {
+      this.sunsetService.getSunsetHour().subscribe((data) => {
+        sunsetHour = this.stringToHourNumber(data.results.sunset);
+        this.maxHour = sunsetHour - 2;
+        this.createHoursTimeTable();
+      })
+    }
+  }
+
   createHoursTimeTable(): void {
     for(let i = this.minHour; i < this.maxHour; i++) {
-        this.hoursTimeTable.push(i);
-        // this.hoursTimeTable.push(i + 0.25);
-        this.hoursTimeTable.push(i + 0.5);
-        // this.hoursTimeTable.push(i + 0.75);
+      this.hoursTimeTable.push(i);
+      // this.hoursTimeTable.push(i + 0.25);
+      this.hoursTimeTable.push(i + 0.5);
+      // this.hoursTimeTable.push(i + 0.75);
     }
+    console.log(this.maxHour);
     console.log(this.hoursTimeTable);
   }
 
