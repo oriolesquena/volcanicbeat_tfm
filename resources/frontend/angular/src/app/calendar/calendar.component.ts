@@ -154,8 +154,6 @@ export class CalendarComponent {
       check_politiques: this.check_politiques,
     })
 
-    this.calculateLastHour();
-
     this.loadReservations();
   }
 
@@ -195,12 +193,12 @@ export class CalendarComponent {
 
   calculateLastHour(): void {
     let sunsetHour: number;
-    let currentDate: Date = new Date();
+    let currentDateString = formatDate(this.selectedDate, 'yyyy-MM-dd', 'en');
 
-    if (this.summerMonths.includes(currentDate.getMonth())) {
+    if (this.summerMonths.includes(this.selectedDate.getMonth())) {
       this.maxHour = 21;
     } else {
-      this.sunsetService.getSunsetHour().subscribe((data) => {
+      this.sunsetService.getSunsetHour(currentDateString).subscribe((data) => {
         sunsetHour = this.stringToHourNumber(data.results.sunset);
         this.maxHour = sunsetHour - 2;
         this.createHoursTimeTable();
@@ -209,10 +207,13 @@ export class CalendarComponent {
   }
 
   createHoursTimeTable(): void {
-    for(let i = this.minHour; i < this.maxHour; i++) {
+    this.hoursTimeTable = [];
+    for(let i = this.minHour; i <= this.maxHour; i++) {
       this.hoursTimeTable.push(i);
       // this.hoursTimeTable.push(i + 0.25);
-      this.hoursTimeTable.push(i + 0.5);
+      if (i + 0.5 <= this.maxHour){
+        this.hoursTimeTable.push(i + 0.5);
+      }
       // this.hoursTimeTable.push(i + 0.75);
     }
     console.log(this.maxHour);
@@ -242,6 +243,7 @@ export class CalendarComponent {
     console.log(this.selectedDate);
     this.hoursNotAvailable = [13, 13.5, 14, 14.5]; // reset to lunch hours
     this.availableHours(this.selectedDate);
+    this.calculateLastHour();
   }
 
   availableHours(date: Date): void {
@@ -252,6 +254,9 @@ export class CalendarComponent {
     const gameHours = gamesPerDate.map((games) => (games.getHours() + games.getMinutes()/60));
     
     gameHours.forEach(hour => {
+      this.hoursNotAvailable.push(hour - 1.5);
+      this.hoursNotAvailable.push(hour - 1);
+      this.hoursNotAvailable.push(hour - 0.5);
       this.hoursNotAvailable.push(hour);
       this.hoursNotAvailable.push(hour + 0.5);
       this.hoursNotAvailable.push(hour + 1);
@@ -286,11 +291,10 @@ export class CalendarComponent {
 
     this.isValidForm = true;
     this.bookingMsg = this.bookingForm.value;
-    const hours = parseInt(this.timeTableForm.value.time);
+    const hours = parseFloat(this.timeTableForm.value.time);
     const minutes = (hours - Math.floor(hours)) * 60;
     this.reservationDate = new Date(this.selectedDate.setHours(hours));
     this.reservationDate.setMinutes(minutes);
-    console.log(this.reservationDate);
 
     const booking: BookingDTO = {
       name: this.bookingMsg.name,

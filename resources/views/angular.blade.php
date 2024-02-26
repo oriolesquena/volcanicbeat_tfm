@@ -15,6 +15,6 @@
 
 <body class="mat-typography ig-typography ig-scrollbar">
   <app-root></app-root>
-<script src="runtime.02f9c77d947caaa6.js" type="module"></script><script src="polyfills.7dd0658a35f94c40.js" type="module"></script><script src="scripts.cd816875f3dc91fb.js" defer></script><script src="main.5e1e45cd21ab4c8f.js" type="module"></script></body>
+<script src="runtime.02f9c77d947caaa6.js" type="module"></script><script src="polyfills.7dd0658a35f94c40.js" type="module"></script><script src="scripts.cd816875f3dc91fb.js" defer></script><script src="main.f1294220b8760360.js" type="module"></script></body>
 
 </html>

@@ -8,8 +8,8 @@ import { Observable } from 'rxjs';
 export class SunsetService {
   constructor(private http: HttpClient) {}
 
-  getSunsetHour(): Observable<any> {
-    const endpoint = 'https://api.sunrisesunset.io/json?lat=42.174900&lng=2.509958&timezone=Europe/Berlin&date=2024-03-30'
+  getSunsetHour(date: string): Observable<any> {
+    const endpoint = 'https://api.sunrisesunset.io/json?lat=42.174900&lng=2.509958&timezone=Europe/Berlin&date=' + date;
 
     return this.http.get<any>(endpoint);
   }
