@@ -14,4 +14,10 @@ export class FormMailService {
 
     return this.http.post(endpoint, form, { observe: 'response' });
   }
+
+  sendEmailClient(form: any) {
+    const endpoint = 'http://192.168.1.42:8000/api/send-email-client'
+
+    return this.http.post(endpoint, form, { observe: 'response' });
+  }
 }

@@ -11,7 +11,6 @@ import { AboutComponent } from './about/about.component';
 import { PricesComponent } from './prices/prices.component';
 import { ContactComponent } from './contact/contact.component';
 import { CalendarComponent } from './calendar/calendar.component';
-import { CalendarFormComponent } from './calendar-old/calendar-form.component';
 import { HeaderComponent } from './Shared/header/header.component';
 import { FooterComponent } from './Shared/footer/footer.component';
 import { ContactFormComponent } from './contact-form/contact-form.component';
@@ -52,7 +51,6 @@ import { IgxTimePickerModule, IgxToastModule  } from 'igniteui-angular';
     PricesComponent,
     ContactComponent,
     CalendarComponent,
-    CalendarFormComponent,
     ContactFormComponent,
     ActivitiesComponent,
     GalleryComponent,

@@ -26,14 +26,17 @@ class MailForm extends Mailable
     public function build()
     {
         $name = $this->data['name'];
-        $isBooking = $this->data['isBooking'];
+        $typeOfMail = $this->data['typeOfMail'];
 
-        if($isBooking === true) {
+        if($typeOfMail == 2) {
             $subject = 'Nou formulari de reserves';
             $view = 'emails.booking';
-        } else {
+        } else if ($typeOfMail == 1) {
             $subject = 'Nou formulari de contacte';
             $view = 'emails.contact';
+        } else {
+            $subject = 'Pre-reserva partida làser tag';
+            $view = 'emails.booking-client';
         }
 
         return $this

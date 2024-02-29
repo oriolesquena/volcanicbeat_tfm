@@ -31,7 +31,7 @@ export class ContactFormComponent implements OnInit {
   showMessage: boolean;
 
   constructor (private formBuilder: FormBuilder, private formMailService: FormMailService) {
-    this.contactMsg = new ContactDTO('', '', '', '', '', false, false);
+    this.contactMsg = new ContactDTO('', '', '', '', '', false, 1);
 
     this.isValidForm = null;
     this.processing = false;
@@ -98,7 +98,7 @@ export class ContactFormComponent implements OnInit {
       title: this.contactMsg.title,
       msg: this.contactMsg.msg,
       check_politiques: this.contactMsg.check_politiques,
-      isBooking: false,
+      typeOfMail: 1,
     };
 
     // console.log( contact );

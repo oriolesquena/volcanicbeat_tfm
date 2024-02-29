@@ -86,7 +86,7 @@ export class CalendarComponent {
   reservationDate: Date = new Date();
 
   constructor (private formBuilder: FormBuilder, private formMailService: FormMailService, public reservationService: ReservationService, public sunsetService: SunsetService) {
-    this.bookingMsg = new BookingDTO('', '', '', '', 8, '', '', false, false, true);
+    this.bookingMsg = new BookingDTO('', '', '', '', 8, '', '', false, false, 2);
 
     this.isValidForm = null;
     this.processing = false;
@@ -306,8 +306,12 @@ export class CalendarComponent {
       msg: this.bookingMsg.msg,
       under_sixteen: this.bookingMsg.under_sixteen,
       check_politiques: this.bookingMsg.check_politiques,
-      isBooking: true,
+      typeOfMail: 2, // send mail to VB
     };
+
+    const bookingClient = JSON.parse(JSON.stringify(booking));
+
+    bookingClient.typeOfMail = 3; // send mail to client
 
     const reservation: Reservation = {
       name: this.bookingMsg.name,
@@ -330,6 +334,19 @@ export class CalendarComponent {
       }
     })
 
+    this.formMailService.sendEmailClient(bookingClient).subscribe({
+      next: (response: HttpResponse<any>) => {
+        if (response.ok) {
+          console.log('Email to client succesfully sent');
+          console.log(bookingClient.typeOfMail);
+          console.log(booking.typeOfMail);
+        }
+      },
+      error: (error: any) => {
+        console.error('Error sending email to client:', error);
+      }
+    })
+
     this.formMailService.sendEmail(booking).subscribe({
       next: (response: HttpResponse<any>) => {
         if (response.ok) {
@@ -339,6 +356,7 @@ export class CalendarComponent {
             this.bookingForm.reset();
             this.processing = false;
             this.showMessage = true;
+            console.log('Email to VB succesfully sent');
           }, 400);
           setTimeout(() => {
             this.showMessage = false;

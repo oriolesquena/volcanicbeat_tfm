@@ -5,7 +5,7 @@ export class ContactDTO {
     title: string;
     msg: string;
     check_politiques: boolean;
-    isBooking: boolean;
+    typeOfMail: number;
   
     constructor(
       name: string,
@@ -14,7 +14,7 @@ export class ContactDTO {
       title: string,
       msg: string,
       check_politiques: boolean,
-      isBooking: boolean,
+      typeOfMail: number,
     ) {
       this.name = name;
       this.email = email;
@@ -22,7 +22,7 @@ export class ContactDTO {
       this.title = title;
       this.msg = msg;
       this.check_politiques = check_politiques;
-      this.isBooking = isBooking;
+      this.typeOfMail = typeOfMail;
     }
   }
   

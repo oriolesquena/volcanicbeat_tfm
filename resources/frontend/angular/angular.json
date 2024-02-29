@@ -50,7 +50,13 @@
             "production": {
               "outputPath": "../../../public/assets/angular",
               "baseHref": "/assets/angular/",
-              "optimization": true,
+              "optimization": {
+                "scripts": true,
+                "styles": {
+                  "minify": true,
+                  "inlineCritical": false
+                }
+              },
               "budgets": [
                 {
                   "type": "initial",

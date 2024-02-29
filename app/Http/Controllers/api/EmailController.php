@@ -18,4 +18,14 @@ class EmailController extends Controller
 
         return response()->json(['message' => 'Email sent successfully']);
     }
+
+    public function sendEmailClient(Request $request)
+    {
+        // Validate the request data here if needed
+
+        // Send email
+        Mail::to($request['email'])->send(new MailForm($request->all()));
+
+        return response()->json(['message' => 'Email to client sent successfully']);
+    }
 }

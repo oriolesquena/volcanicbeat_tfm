@@ -22,6 +22,8 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::post('/send-email', [EmailController::class, 'sendEmail']);
 
+Route::post('/send-email-client', [EmailController::class, 'sendEmailClient']);
+
 Route::prefix('reservation')->group(function () {
     Route::get('/',[ ReservationController::class, 'getAll']);
     Route::post('/',[ ReservationController::class, 'create']);
