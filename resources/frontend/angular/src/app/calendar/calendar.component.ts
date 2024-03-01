@@ -360,7 +360,7 @@ export class CalendarComponent {
           }, 400);
           setTimeout(() => {
             this.showMessage = false;
-            window.location.reload();
+            // window.location.reload();
           }, 3500);
         }
       },

@@ -37,6 +37,7 @@ class MailForm extends Mailable
         } else {
             $subject = 'Pre-reserva partida làser tag';
             $view = 'emails.booking-client';
+            $name = 'Volcanic Beat - Laser Tag';
         }
 
         return $this
